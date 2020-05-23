@@ -3,11 +3,9 @@ import { useAuth0 } from '../utils/auth';
 
 export default function Upload() {
     const [imageDataUrl, setImageDataUrl] = useState('');
-    const [inputFile, setInputFile] = useState('');
-    const { user, getTokenSilently } = useAuth0();
+    const { getTokenSilently } = useAuth0();
     const handleChange = (e) => {
         const file = e.target.files[0];
-        setInputFile(file.name);
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
@@ -20,7 +18,6 @@ export default function Upload() {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        console.log('submitting');
         try {
             const token = await getTokenSilently();
             const res = await fetch('/.netlify/functions/upload', {
@@ -30,9 +27,9 @@ export default function Upload() {
                     authorization: `Bearer ${token}`,
                 },
             });
-            const data = await res.json();
+            await res.json();
             setImageDataUrl('');
-            setInputFile('');
+            e.target.value = null;
         } catch (err) {
             console.error(err);
         }
@@ -47,7 +44,6 @@ export default function Upload() {
                         name="file"
                         className="form-control-file"
                         onChange={handleChange}
-                        // value={inputFile}
                     />
                 </div>
                 <button

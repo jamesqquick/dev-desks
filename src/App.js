@@ -1,10 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import Upload from './components/Upload';
 import ImageGallery from './components/ImageGallery';
 import { useAuth0 } from './utils/auth';
-
+import './App.css';
 function App() {
     const {
         loginWithRedirect,

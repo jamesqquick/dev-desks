@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import history from './utils/history';
 import { Auth0Provider } from './utils/auth';
+import authConfig from './authConfig';
 const onRedirectCallback = (appState) => {
     history.push(
         appState && appState.targetUrl
@@ -13,11 +13,7 @@ const onRedirectCallback = (appState) => {
             : window.location.pathname
     );
 };
-const authConfig = {
-    domain: 'whotofollow.auth0.com',
-    clientId: 'wBjmBFe1Z3pUOGH1khKXyaM822VD6Zyw',
-    audience: 'https://whotofollowapi/',
-};
+
 ReactDOM.render(
     <Auth0Provider
         domain={authConfig.domain}

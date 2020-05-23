@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from './Image';
 export default function ImageGallery() {
     const [images, setImages] = useState(null);
 
-    const loadImages = useCallback(async () => {
+    const loadImages = async () => {
         try {
             const res = await fetch('/.netlify/functions/getImages');
             const data = await res.json();
@@ -11,15 +11,14 @@ export default function ImageGallery() {
         } catch (err) {
             console.error(err);
         }
-    }, []);
+    };
 
     useEffect(() => {
-        console.log('getting images');
-        //loadImages();
-    }, [loadImages]);
+        loadImages();
+    }, [setImages]);
 
     return (
-        <div>
+        <div className="image-gallery">
             {images &&
                 images.map((image) => (
                     <Image

@@ -13,7 +13,8 @@ export default function Image({ cloudName, publicId, transforms }) {
                 ...transforms,
             },
         });
-    }, [getImage, publicId, transforms]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     if (status === 'loading') return <p>Loading...</p>;
     if (status === 'error') return <p>{error.message}</p>;
