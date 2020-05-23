@@ -15,7 +15,6 @@ function App() {
     } = useAuth0();
 
     if (loading) return <p>loading...</p>;
-    console.log(user, isAuthenticated);
     return (
         <div className="container mt-4">
             {!isAuthenticated && (

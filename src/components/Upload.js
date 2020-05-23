@@ -4,7 +4,7 @@ import { useAuth0 } from '../utils/auth';
 export default function Upload() {
     const [imageDataUrl, setImageDataUrl] = useState('');
     const [inputFile, setInputFile] = useState('');
-    const { user } = useAuth0();
+    const { user, getTokenSilently } = useAuth0();
     const handleChange = (e) => {
         const file = e.target.files[0];
         setInputFile(file.name);
@@ -22,12 +22,13 @@ export default function Upload() {
         e.preventDefault();
         console.log('submitting');
         try {
+            const token = await getTokenSilently();
             const res = await fetch('/.netlify/functions/upload', {
                 method: 'POST',
-                body: JSON.stringify({
-                    file: imageDataUrl,
-                    username: user['http://whotofollow.com/handle'],
-                }),
+                body: imageDataUrl,
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
             });
             const data = await res.json();
             setImageDataUrl('');

@@ -7,15 +7,26 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 const { table } = require('./utils/airtable');
-
+const { checkHeaderForValidToken } = require('./utils/auth');
 exports.handler = async (event) => {
-    const { file, username } = JSON.parse(event.body);
+    let user = null;
+    try {
+        user = await checkHeaderForValidToken(event.headers);
+    } catch (err) {
+        return {
+            statusCode: 401,
+            body: JSON.stringify({ err: 'Unauthorized' }),
+        };
+    }
+    const file = event.body;
+    const username = user['http://whotofollow.com/handle'];
+
     try {
         const { public_id } = await cloudinary.uploader.upload(file);
         console.log(public_id);
         const record = await table.create({
             imgId: public_id,
-            username,
+            username: 'jamesqquick',
             likes: 0,
         });
         return {
