@@ -1,28 +1,26 @@
 import React from 'react';
-import Upload from './components/Upload';
-import ImageGallery from './components/ImageGallery';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useAuth0 } from './utils/auth';
 import './App.css';
+import home from './pages/home';
+import profile from './pages/profile';
+import Navbar from './components/Navbar';
 function App() {
-    const {
-        loginWithRedirect,
-        logout,
-        user,
-        isAuthenticated,
-        loading,
-    } = useAuth0();
+    const { loading } = useAuth0();
 
-    if (loading) return <p>loading...</p>;
     return (
-        <div className="container mt-4">
-            {!isAuthenticated && (
-                <button onClick={loginWithRedirect}>Login</button>
-            )}
-            {isAuthenticated && <button onClick={logout}>Logout</button>}
-            {user && <p>Welcome, {user['http://whotofollow.com/handle']}</p>}
-            {isAuthenticated && <Upload />}
-            <ImageGallery />
-        </div>
+        <Router>
+            <div className="container ">
+                <Navbar />
+                {loading && <p>loading</p>}
+                {!loading && (
+                    <Switch>
+                        <Route component={home} path="/" exact />
+                        <Route component={profile} path="/profile" />
+                    </Switch>
+                )}
+            </div>
+        </Router>
     );
 }
 

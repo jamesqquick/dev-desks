@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth0 } from '../utils/auth';
 
-export default function Upload() {
+export default function Upload({ imageUploaded }) {
     const [imageDataUrl, setImageDataUrl] = useState('');
     const { getTokenSilently } = useAuth0();
     const handleChange = (e) => {
@@ -17,6 +17,8 @@ export default function Upload() {
     };
 
     const submitHandler = async (e) => {
+        e.target.value = null;
+
         e.preventDefault();
         try {
             const token = await getTokenSilently();
@@ -29,7 +31,7 @@ export default function Upload() {
             });
             await res.json();
             setImageDataUrl('');
-            e.target.value = null;
+            imageUploaded();
         } catch (err) {
             console.error(err);
         }
