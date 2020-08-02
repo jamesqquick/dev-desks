@@ -4,14 +4,12 @@ import { useAuth0 } from './utils/auth';
 import './App.css';
 import home from './pages/home';
 import profile from './pages/profile';
-import Navbar from './components/Navbar';
 function App() {
     const { loading } = useAuth0();
 
     return (
         <Router>
             <div className="container ">
-                <Navbar />
                 {loading && <p>loading</p>}
                 {!loading && (
                     <Switch>

@@ -1,5 +1,5 @@
 require('dotenv').config();
-const cloudinary = require('cloudinary');
+const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -21,7 +21,9 @@ exports.handler = async (event) => {
     const file = event.body;
     const username = user['http://whotofollow.com/handle'];
     try {
-        const { public_id } = await cloudinary.uploader.upload(file);
+        const { public_id } = await cloudinary.uploader.upload(file, {
+            upload_preset: 'dev_setups',
+        });
 
         const existingRecord = await getImageForUser(username);
 
@@ -43,7 +45,6 @@ exports.handler = async (event) => {
             const createdRecord = await table.create({
                 imgId: public_id,
                 username: 'jamesqquick',
-                likes: 0,
             });
             console.log(createdRecord);
             return {

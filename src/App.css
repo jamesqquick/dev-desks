@@ -1,5 +1,21 @@
 .image-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 2rem;
+    grid-template-columns: repeat(auto-fit, 300px);
+    grid-gap: 1rem;
+}
+
+.gallery-img {
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+    transition: transform 200ms;
+    border-radius: 5px;
+}
+
+.title {
+    font-family: 'Pacifico', cursive;
+}
+
+.gallery-img:hover {
+    transform: scale(1.03);
 }

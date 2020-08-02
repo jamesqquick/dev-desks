@@ -14,6 +14,7 @@ export const Auth0Provider = ({
 }) => {
     const [isAuthenticated, setIsAuthenticated] = useState();
     const [user, setUser] = useState();
+    const [username, setUsername] = useState();
     const [auth0Client, setAuth0] = useState();
     const [loading, setLoading] = useState(true);
     const [popupOpen, setPopupOpen] = useState(false);
@@ -40,6 +41,7 @@ export const Auth0Provider = ({
             if (isAuthenticated) {
                 const user = await auth0FromHook.getUser();
                 setUser(user);
+                setUsername(user['http://whotofollow.com/handle']);
             }
 
             setLoading(false);
@@ -75,6 +77,7 @@ export const Auth0Provider = ({
             value={{
                 isAuthenticated,
                 user,
+                username,
                 loading,
                 popupOpen,
                 loginWithPopup,

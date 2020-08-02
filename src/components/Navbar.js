@@ -1,58 +1,39 @@
 import React from 'react';
 import { useAuth0 } from '../utils/auth';
 import { Link } from 'react-router-dom';
-
-export default function Navbar() {
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import { LinkContainer } from 'react-router-bootstrap';
+import Button from 'react-bootstrap/Button';
+export default function MyNavbar() {
     const {
         loginWithRedirect,
         logout,
-        user,
         isAuthenticated,
+        username,
         loading,
     } = useAuth0();
-    return (
-        <div>
-            <nav className="navbar navbar-light bg-light mt-3 mb-5">
-                <span className="navbar-brand mb-0 h1">Dev Setups</span>
 
-                <ul className="navbar-nav flex-row">
-                    <li className="nav-item active mr-3">
-                        <Link className="nav-link" to="/">
-                            Home
-                        </Link>
-                    </li>
-                    {isAuthenticated && (
-                        <>
-                            <li className="nav-item active mr-3">
-                                <Link className="nav-link" to="/profile">
-                                    Profile
-                                </Link>
-                            </li>
-                            <li className="nav-item active mr-3">
-                                <button
-                                    className="btn btn-primary my-2 my-sm-0"
-                                    onClick={logout}
-                                >
-                                    Logout
-                                </button>
-                            </li>
-                        </>
-                    )}
-                    {!isAuthenticated && (
-                        <li className="nav-item active mr-3">
-                            <button
-                                className="btn btn-primary my-2 my-sm-0"
-                                onClick={loginWithRedirect}
-                            >
-                                Login
-                            </button>
-                        </li>
-                    )}
-                </ul>
-                {/* {user && (
-                    <p>Welcome, {user['http://whotofollow.com/handle']}</p>
-                )} */}
-            </nav>
-        </div>
+    return (
+        <nav className="mb-5">
+            <div className="nav-items d-flex justify-content-center ">
+                {!loading && !isAuthenticated && (
+                    <Button variant="primary" onClick={loginWithRedirect}>
+                        Login
+                    </Button>
+                )}
+                {!loading && isAuthenticated && username && (
+                    <>
+                        <Link to="/">Home</Link>
+
+                        <Link to="profile">Profile</Link>
+                        <Button variant="primary" onClick={logout}>
+                            Logout
+                        </Button>
+                    </>
+                )}
+            </div>
+        </nav>
     );
 }

@@ -5,6 +5,7 @@ Airtable.configure({
 });
 const base = Airtable.base(process.env.AIRTABLE_BASE_ID);
 const table = base(process.env.AIRTABLE_TABLE_NAME);
+const likesTable = base('likes');
 
 const getMinifiedRecord = (record) => {
     return {
@@ -25,4 +26,10 @@ const getImageForUser = async (username) => {
     }
     return records[0];
 };
-module.exports = { base, table, getMinifiedRecord, getImageForUser };
+module.exports = {
+    base,
+    table,
+    getMinifiedRecord,
+    getImageForUser,
+    likesTable,
+};

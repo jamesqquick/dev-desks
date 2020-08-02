@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Upload from '../components/Upload';
 import { useAuth0 } from '../utils/auth';
-import Image from '../components/Image';
+import { Image } from 'cloudinary-react';
+import Navbar from '../components/Navbar';
+import Transformation from 'cloudinary-react/lib/components/Transformation';
 
 export default function Profile() {
     //get user's profile pic if it exists
@@ -10,14 +12,12 @@ export default function Profile() {
     const { user } = useAuth0();
 
     const loadUserImage = useCallback(async () => {
-        console.log('loading image');
         const username = user['http://whotofollow.com/handle'];
         try {
             const res = await fetch(
                 `/.netlify/functions/getUserImage?username=${username}`
             );
             const data = await res.json();
-            console.log(data);
             data.imgId && setProfilePicId(data.imgId);
         } catch (err) {
             console.error(err);
@@ -29,7 +29,9 @@ export default function Profile() {
 
     return (
         <div>
-            <h1>Profile</h1>
+            <h1 className="my-5 title text-center display-1">Profile</h1>
+            <Navbar />
+
             <Upload imageUploaded={loadUserImage} />
             {!profilePicId && <p>You should upload an image</p>}
 
@@ -39,11 +41,11 @@ export default function Profile() {
                     <Image
                         cloudName="jamesqquick"
                         publicId={profilePicId}
-                        transforms={{
-                            width: 300,
-                            crop: 'scale',
-                        }}
-                    />
+                        height="300"
+                        className="img-thumbnail"
+                    >
+                        <Transformation width="300" height="300" crop="fill" />
+                    </Image>
                 </>
             )}
         </div>
