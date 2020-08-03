@@ -17,7 +17,7 @@ You'll need to create a base in Airtable and a table within the base for storing
 
 -   imgId - single line text
 -   username - single line text
--   usersLink - single line text
+-   usesLink - single line text
 
 ### Environment Variables
 
