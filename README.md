@@ -1,6 +1,6 @@
 # Dev Setups
 
-Dev Setups is a platform where uses can share pictures of their desk setups. It is powered by React, Netlify Functions, Airtable, and Cloudinary.
+Dev Setups is a platform where users can share pictures of their desk setups. It is powered by React, Netlify Functions, Airtable, and Cloudinary.
 
 ## Setup
 
