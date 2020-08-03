@@ -22,7 +22,7 @@ exports.handler = async (event) => {
     const username = user['http://whotofollow.com/handle'];
     try {
         const { public_id } = await cloudinary.uploader.upload(file, {
-            upload_preset: 'dev_setups',
+            upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET,
         });
 
         const existingRecord = await getImageForUser(username);

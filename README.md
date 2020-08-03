@@ -1,21 +1,56 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Dev Setups
 
-## Available Scripts
+Dev Setups is a platform where uses can share pictures of their desk setups. It is powered by React, Netlify Functions, Airtable, and Cloudinary.
 
-In the project directory, you can run:
+## Setup
 
-### `yarn start`
+You'll need a free account with the following platforms.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+-   Airtable
+-   Cloudinary
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+An Auth0 account is needed but you can use the credentials below. The Auth0 configuration is already done.
 
-### `yarn test`
+### Airtable Setup
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You'll need to create a base in Airtable and a table within the base for storing user info
+
+-   imgId - single line text
+-   username - single line text
+-   usesLink - single line text
+
+### Environment Variables
+
+After creating the free accounts above, you'll need to create a `.env` file with the following properties. You can copy from here or from the `.env.sample` file.
+
+```javascript
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+AIRTABLE_API_KEY=
+AIRTABLE_BASE_ID=
+AIRTABLE_TABLE_NAME=
+
+AUTH0_DOMAIN=whotofollow.auth0.com
+AUTH0_KEY_ID=83kBRWb7ovOMMVD6uEAHS
+```
+
+## How to Run
+
+Install the Netlify CLI
+
+```bash
+npm install netlify-cli
+```
+
+Then, run the app with following command.
+
+```bash
+netlify dev
+```
+
+You can then open the app at `localhost:8888`
 
 ### `yarn build`
 
@@ -26,43 +61,3 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
