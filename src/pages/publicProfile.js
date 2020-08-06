@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, Transformation } from 'cloudinary-react';
-import Navbar from '../components/Navbar';
 
 export default function PublicProfile({ match }) {
     const { params } = match;
@@ -24,39 +22,22 @@ export default function PublicProfile({ match }) {
 
     return (
         <>
-            <div className="text-center">
-                {user && (
-                    <div>
-                        <h1 className="my-5 title text-center display-1">
-                            {user.username}
-                        </h1>
-                        <Navbar />
-                        <Image
-                            cloudName="jamesqquick"
-                            publicId={user.imgId}
-                            height="150"
-                        >
-                            <Transformation
-                                width="150"
-                                height="150"
-                                crop="fill"
-                            />
-                        </Image>
-                        <div>
-                            <a
-                                href={`https://www.twitter.com/${user.username}`}
-                            >
-                                Twitter
-                            </a>
-                            {user.usesLink && (
-                                <a href={user.usesLink}>
-                                    {user.username} uses page
-                                </a>
-                            )}
-                        </div>
-                    </div>
-                )}
-            </div>
+            <h2>{params.username}</h2>
+            <a href={`https://www.twitter.com/${params.username}`}>
+                @{params.username}
+            </a>
+            <p>
+                {user && user.usesLink && <a href={user.usesLink}>Uses Page</a>}
+            </p>
+            {user && (
+                <div>
+                    <div></div>
+                    <Image cloudName="jamesqquick" publicId={user.imgId}>
+                        <Transformation width="800" crop="fill" />
+                    </Image>
+                </div>
+            )}
+            {!user && <img src="/placeholder-image.png" alt="profile"></img>}
         </>
     );
 }

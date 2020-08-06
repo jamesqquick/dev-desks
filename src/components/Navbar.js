@@ -1,11 +1,6 @@
 import React from 'react';
 import { useAuth0 } from '../utils/auth';
 import { Link } from 'react-router-dom';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { LinkContainer } from 'react-router-bootstrap';
-import Button from 'react-bootstrap/Button';
 export default function MyNavbar() {
     const {
         loginWithRedirect,
@@ -17,20 +12,24 @@ export default function MyNavbar() {
 
     return (
         <nav className="mb-5">
-            <div className="nav-items d-flex justify-content-center ">
+            <div className="nav-items d-flex justify-content-center align-items-center">
+                <Link to="/" className="mr-2">
+                    Home
+                </Link>
                 {!loading && !isAuthenticated && (
-                    <Button variant="primary" onClick={loginWithRedirect}>
+                    <button
+                        className="btn btn-link"
+                        onClick={loginWithRedirect}
+                    >
                         Login
-                    </Button>
+                    </button>
                 )}
                 {!loading && isAuthenticated && username && (
                     <>
-                        <Link to="/">Home</Link>
-
-                        <Link to="profile">Profile</Link>
-                        <Button variant="primary" onClick={logout}>
+                        <Link to="/profile">Profile</Link>
+                        <button className="btn btn-link" onClick={logout}>
                             Logout
-                        </Button>
+                        </button>
                     </>
                 )}
             </div>
