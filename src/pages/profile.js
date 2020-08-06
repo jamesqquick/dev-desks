@@ -15,7 +15,7 @@ export default function Profile() {
         const username = user['http://whotofollow.com/handle'];
         try {
             const res = await fetch(
-                `/.netlify/functions/getUserImage?username=${username}`
+                `/.netlify/functions/getUser?username=${username}`
             );
             const data = await res.json();
             data.imgId && setProfilePicId(data.imgId);

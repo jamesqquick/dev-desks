@@ -1,8 +1,4 @@
-const {
-    table,
-    getMinifiedRecord,
-    getImageForUser,
-} = require('./utils/airtable');
+const { getMinifiedRecord, getUser } = require('./utils/airtable');
 exports.handler = async (event) => {
     let username = event.queryStringParameters['username'];
     if (!username) {
@@ -12,9 +8,16 @@ exports.handler = async (event) => {
         };
     }
     try {
-        const minifiedRecord = getMinifiedRecord(
-            await getImageForUser(username)
-        );
+        const userRecord = await getUser(username);
+
+        if (!userRecord) {
+            return {
+                statusCode: 404,
+                body: JSON.stringify({ msg: `That's not a user!` }),
+            };
+        }
+
+        const minifiedRecord = getMinifiedRecord(userRecord);
         return {
             statusCode: 200,
             body: JSON.stringify(minifiedRecord),

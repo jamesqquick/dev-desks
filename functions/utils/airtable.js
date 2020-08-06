@@ -14,7 +14,7 @@ const getMinifiedRecord = (record) => {
     };
 };
 
-const getImageForUser = async (username) => {
+const getUser = async (username) => {
     const records = await table
         .select({
             maxRecords: 1,
@@ -22,7 +22,7 @@ const getImageForUser = async (username) => {
         })
         .firstPage();
     if (records.length === 0) {
-        return {};
+        return null;
     }
     return records[0];
 };
@@ -30,6 +30,6 @@ module.exports = {
     base,
     table,
     getMinifiedRecord,
-    getImageForUser,
+    getUser,
     likesTable,
 };

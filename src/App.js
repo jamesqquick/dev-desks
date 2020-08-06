@@ -4,6 +4,7 @@ import { useAuth0 } from './utils/auth';
 import './App.css';
 import home from './pages/home';
 import profile from './pages/profile';
+import PublicProfile from './pages/publicProfile';
 function App() {
     const { loading } = useAuth0();
 
@@ -15,6 +16,10 @@ function App() {
                     <Switch>
                         <Route component={home} path="/" exact />
                         <Route component={profile} path="/profile" />
+                        <Route
+                            path="/users/:username"
+                            component={PublicProfile}
+                        />
                     </Switch>
                 )}
             </div>

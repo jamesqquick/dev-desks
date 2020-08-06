@@ -6,7 +6,7 @@ cloudinary.config({
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-const { table, getImageForUser } = require('./utils/airtable');
+const { table, getUser } = require('./utils/airtable');
 const { checkHeaderForValidToken } = require('./utils/auth');
 exports.handler = async (event) => {
     let user = null;
@@ -25,7 +25,7 @@ exports.handler = async (event) => {
             upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET,
         });
 
-        const existingRecord = await getImageForUser(username);
+        const existingRecord = await getUser(username);
 
         if (existingRecord) {
             //update
