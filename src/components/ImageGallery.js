@@ -3,34 +3,39 @@ import ImageCard from './ImageCard';
 import { Image, Transformation } from 'cloudinary-react';
 
 export default function ImageGallery() {
-    const [images, setImages] = useState(null);
+    const [users, setUsers] = useState(null);
 
-    const loadImages = async () => {
+    const loadUsers = async () => {
         try {
-            const res = await fetch('/.netlify/functions/getImages');
-            const data = await res.json();
-            setImages(data);
+            const res = await fetch('/.netlify/functions/getUsers');
+            const users = await res.json();
+            setUsers(users);
         } catch (err) {
             console.error(err);
         }
     };
 
     useEffect(() => {
-        loadImages();
-    }, [setImages]);
+        loadUsers();
+    }, [setUsers]);
 
     return (
         <div className="image-gallery">
-            {images &&
-                images.map((image, index) => (
-                    <Image
-                        cloudName="jamesqquick"
-                        publicId={image.imgId}
-                        className="gallery-img"
-                        key={index}
-                    >
-                        <Transformation width="300" height="300" crop="fill" />
-                    </Image>
+            {users &&
+                users.map((user, index) => (
+                    <a href={`/users/${user.username}`} key={index}>
+                        <Image
+                            cloudName="jamesqquick"
+                            publicId={user.imgId}
+                            className="gallery-img"
+                        >
+                            <Transformation
+                                width="300"
+                                height="300"
+                                crop="fill"
+                            />
+                        </Image>
+                    </a>
                 ))}
         </div>
     );
