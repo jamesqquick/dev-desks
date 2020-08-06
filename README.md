@@ -15,8 +15,8 @@ An Auth0 account is needed but you can use the credentials below. The Auth0 conf
 
 You'll need to create a base in Airtable and a table within the base for storing user info
 
+-   username (primary field) - single line text
 -   imgId - single line text
--   username - single line text
 -   usesLink - single line text
 
 ### Environment Variables
