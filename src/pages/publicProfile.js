@@ -31,8 +31,12 @@ export default function PublicProfile({ match }) {
             </p>
             {user && (
                 <div>
-                    <div></div>
-                    <Image cloudName="jamesqquick" publicId={user.imgId}>
+                    <Image
+                        cloudName="jamesqquick"
+                        publicId={
+                            user.imgId || 'dev_setups/placeholder-image_vcbif2'
+                        }
+                    >
                         <Transformation width="800" crop="fill" />
                     </Image>
                 </div>
