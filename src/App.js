@@ -1,30 +1,27 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useAuth0 } from './utils/auth';
+import { useAuth0 } from '@auth0/auth0-react';
 import './App.css';
 import home from './pages/home';
 import profile from './pages/profile';
 import PublicProfile from './pages/publicProfile';
 function App() {
-    const { loading } = useAuth0();
+  const { isLoading } = useAuth0();
 
-    return (
-        <Router>
-            <div className="container ">
-                {loading && <p>loading</p>}
-                {!loading && (
-                    <Switch>
-                        <Route component={home} path="/" exact />
-                        <Route component={profile} path="/profile" />
-                        <Route
-                            path="/users/:username"
-                            component={PublicProfile}
-                        />
-                    </Switch>
-                )}
-            </div>
-        </Router>
-    );
+  return (
+    <Router>
+      <div className='container '>
+        {isLoading && <p>loading</p>}
+        {!isLoading && (
+          <Switch>
+            <Route component={home} path='/' exact />
+            <Route component={profile} path='/profile' />
+            <Route path='/users/:username' component={PublicProfile} />
+          </Switch>
+        )}
+      </div>
+    </Router>
+  );
 }
 
 export default App;
