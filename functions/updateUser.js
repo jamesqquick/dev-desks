@@ -1,5 +1,4 @@
 require('dotenv').config();
-const { cloudinary } = require('./utils/cloudinary');
 
 const { table, getUser } = require('./utils/airtable');
 const { checkHeaderForValidToken } = require('./utils/auth');
@@ -13,13 +12,17 @@ exports.handler = async (event) => {
             body: JSON.stringify({ err: 'Unauthorized' }),
         };
     }
-    const file = event.body;
-    const username = user['http://whotofollow.com/handle'];
-    try {
-        const { public_id } = await cloudinary.uploader.upload(file, {
-            upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET,
-        });
+    const { username, usesLink } = JSON.parse(event.body);
+    const tokenUsername = user['http://whotofollow.com/handle'];
 
+    if (username !== tokenUsername) {
+        return {
+            statusCode: 401,
+            body: JSON.stringify({ err: 'Unauthorized' }),
+        };
+    }
+
+    try {
         const existingRecord = await getUser(username);
 
         if (existingRecord) {
@@ -28,7 +31,7 @@ exports.handler = async (event) => {
                 id: existingRecord.id,
                 fields: existingRecord.fields,
             };
-            minRecord.fields.imgId = public_id;
+            minRecord.fields.usesLink = usesLink;
             const updateRecords = [minRecord];
             await table.update(updateRecords);
             return {
@@ -38,10 +41,9 @@ exports.handler = async (event) => {
         } else {
             //create
             const createdRecord = await table.create({
-                imgId: public_id,
-                username: 'jamesqquick',
+                username,
+                usesLink,
             });
-            console.log(createdRecord);
             return {
                 statusCode: 200,
                 body: JSON.stringify(createdRecord),
@@ -51,7 +53,7 @@ exports.handler = async (event) => {
         console.error(err);
         return {
             statusCode: 500,
-            body: JSON.stringify({ err: 'Failed to upload image' }),
+            body: JSON.stringify({ err: 'Failed to update user' }),
         };
     }
 };

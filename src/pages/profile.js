@@ -3,6 +3,7 @@ import Upload from '../components/Upload';
 import { useAuth0 } from '../utils/auth';
 import { Image } from 'cloudinary-react';
 import Transformation from 'cloudinary-react/lib/components/Transformation';
+import UserProfileForm from '../components/UserProfileForm';
 
 export default function Profile() {
     const [savedUser, setSavedUser] = useState(null);
@@ -29,6 +30,7 @@ export default function Profile() {
 
     return (
         <div>
+            <UserProfileForm />
             <Upload imageUploaded={loadUser} />
 
             {savedUser && (
