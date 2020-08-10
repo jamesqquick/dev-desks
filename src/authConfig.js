@@ -1,5 +1,5 @@
 export default {
-    domain: 'whotofollow.auth0.com',
-    clientId: 'wBjmBFe1Z3pUOGH1khKXyaM822VD6Zyw',
-    audience: 'https://whotofollowapi/',
+    domain: 'jamesqquick-demos.us.auth0.com',
+    clientId: 'Gw0fbLvvVBn6046ETozNCbQxRz7VPjUd',
+    audience: 'https://dev-setups-api',
 };

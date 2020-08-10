@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ImageCard from './ImageCard';
 import { Image, Transformation } from 'cloudinary-react';
 
 export default function ImageGallery() {

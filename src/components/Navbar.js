@@ -1,13 +1,12 @@
 import React from 'react';
-import { useAuth0 } from '../utils/auth';
+import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
 export default function MyNavbar() {
     const {
         loginWithRedirect,
         logout,
         isAuthenticated,
-        username,
-        loading,
+        isLoading,
     } = useAuth0();
 
     return (
@@ -16,7 +15,7 @@ export default function MyNavbar() {
                 <Link to="/" className="mr-2">
                     Home
                 </Link>
-                {!loading && !isAuthenticated && (
+                {!isLoading && !isAuthenticated && (
                     <button
                         className="btn btn-link"
                         onClick={loginWithRedirect}
@@ -24,7 +23,7 @@ export default function MyNavbar() {
                         Login
                     </button>
                 )}
-                {!loading && isAuthenticated && username && (
+                {!isLoading && isAuthenticated && (
                     <>
                         <Link to="/profile">Profile</Link>
                         <button className="btn btn-link" onClick={logout}>

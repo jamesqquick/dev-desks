@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Upload from '../components/Upload';
-import { useAuth0 } from '../utils/auth';
+import { useAuth0 } from '@auth0/auth0-react';
 import { Image } from 'cloudinary-react';
 import Transformation from 'cloudinary-react/lib/components/Transformation';
 import UserProfileForm from '../components/UserProfileForm';
 
 export default function Profile() {
     const [savedUser, setSavedUser] = useState(null);
-    const { loading, user } = useAuth0();
+    const { isLoading, user } = useAuth0();
 
     const loadUser = useCallback(async () => {
-        if (loading) return;
+        if (isLoading) return;
         //if(!user) //go home
 
         const username = user['http://whotofollow.com/handle'];
@@ -23,10 +23,10 @@ export default function Profile() {
         } catch (err) {
             console.error(err);
         }
-    }, [loading, user]);
+    }, [isLoading, user]);
     useEffect(() => {
         loadUser();
-    }, [loadUser, loading]);
+    }, [loadUser]);
 
     return (
         <div>
