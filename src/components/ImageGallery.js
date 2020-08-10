@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Image, Transformation } from 'cloudinary-react';
+import { Link } from 'react-router-dom';
 
 export default function ImageGallery() {
     const [users, setUsers] = useState(null);
@@ -22,7 +23,7 @@ export default function ImageGallery() {
         <div className="image-gallery">
             {users &&
                 users.map((user, index) => (
-                    <a href={`/users/${user.username}`} key={index}>
+                    <Link to={`/users/${user.username}`} key={index}>
                         <Image
                             cloudName="jamesqquick"
                             publicId={user.imgId}
@@ -34,7 +35,7 @@ export default function ImageGallery() {
                                 crop="fill"
                             />
                         </Image>
-                    </a>
+                    </Link>
                 ))}
         </div>
     );
