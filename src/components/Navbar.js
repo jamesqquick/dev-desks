@@ -26,7 +26,12 @@ export default function MyNavbar() {
                 {!isLoading && isAuthenticated && (
                     <>
                         <Link to="/profile">Profile</Link>
-                        <button className="btn btn-link" onClick={logout}>
+                        <button
+                            className="btn btn-link"
+                            onClick={() =>
+                                logout({ returnTo: window.location.origin })
+                            }
+                        >
                             Logout
                         </button>
                     </>
