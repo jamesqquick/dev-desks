@@ -1,37 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import ImageCard from './ImageCard';
 import { Image, Transformation } from 'cloudinary-react';
 
 export default function ImageGallery() {
-  const [users, setUsers] = useState(null);
+    const [users, setUsers] = useState(null);
 
-  const loadUsers = async () => {
-    try {
-      const res = await fetch('/.netlify/functions/getUsers');
-      const users = await res.json();
-      setUsers(users);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    const loadUsers = async () => {
+        try {
+            const res = await fetch('/.netlify/functions/getUsers');
+            const users = await res.json();
+            setUsers(users);
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
-  useEffect(() => {
-    loadUsers();
-  }, [setUsers]);
+    useEffect(() => {
+        loadUsers();
+    }, [setUsers]);
 
-  return (
-    <div className='image-gallery'>
-      {users &&
-        users.map((user, index) => (
-          <a href={`/users/${user.username}`} key={index}>
-            <Image
-              cloudName='jamesqquick'
-              publicId={user.imgId}
-              className='gallery-img'>
-              <Transformation width='300' height='300' crop='fill' />
-            </Image>
-          </a>
-        ))}
-    </div>
-  );
+    return (
+        <div className="image-gallery">
+            {users &&
+                users.map((user, index) => (
+                    <a href={`/users/${user.username}`} key={index}>
+                        <Image
+                            cloudName="jamesqquick"
+                            publicId={user.imgId}
+                            className="gallery-img"
+                        >
+                            <Transformation
+                                width="300"
+                                height="300"
+                                crop="fill"
+                            />
+                        </Image>
+                    </a>
+                ))}
+        </div>
+    );
 }
