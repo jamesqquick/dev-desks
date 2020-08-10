@@ -32,8 +32,9 @@ AIRTABLE_API_KEY=
 AIRTABLE_BASE_ID=
 AIRTABLE_TABLE_NAME=
 
-AUTH0_DOMAIN=whotofollow.auth0.com
-AUTH0_KEY_ID=83kBRWb7ovOMMVD6uEAHS
+AUTH0_DOMAIN=https://jamesqquick-demos.us.auth0.com/
+AUTH0_AUDIENCE=https://dev-setups-api
+AUTH0_NAMESPACE=http://devsetups.com/
 ```
 
 ## How to Run
