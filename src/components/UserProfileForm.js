@@ -2,9 +2,9 @@ import React from 'react';
 import { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
-export default function UserProfileForm() {
+export default function UserProfileForm({ profileUpdated }) {
     const [usesLink, setUsesLink] = useState('');
-    const { user, getTokenSilently } = useAuth0();
+    const { getAccessTokenSilently } = useAuth0();
 
     const resetForm = () => {
         setUsesLink('');
@@ -12,13 +12,11 @@ export default function UserProfileForm() {
 
     const updateUserProfile = async (e) => {
         e.preventDefault();
-        const username = user['http://whotofollow.com/handle'];
-        const token = await getTokenSilently();
         try {
+            const token = await getAccessTokenSilently();
             await fetch('/.netlify/functions/updateUser', {
                 method: 'POST',
                 body: JSON.stringify({
-                    username,
                     usesLink,
                 }),
                 headers: {
@@ -26,6 +24,7 @@ export default function UserProfileForm() {
                 },
             });
             resetForm();
+            profileUpdated();
         } catch (err) {
             console.error(err);
         }

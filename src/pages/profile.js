@@ -8,12 +8,11 @@ import UserProfileForm from '../components/UserProfileForm';
 export default function Profile() {
     const [savedUser, setSavedUser] = useState(null);
     const { isLoading, user } = useAuth0();
-
     const loadUser = useCallback(async () => {
         if (isLoading) return;
         //if(!user) //go home
 
-        const username = user['http://whotofollow.com/handle'];
+        const username = user.nickname;
         try {
             const res = await fetch(
                 `/.netlify/functions/getUser?username=${username}`
@@ -30,11 +29,20 @@ export default function Profile() {
 
     return (
         <div>
-            <UserProfileForm />
+            <UserProfileForm profileUpdated={loadUser} />
             <Upload imageUploaded={loadUser} />
 
             {savedUser && (
                 <>
+                    <h2>{savedUser.username}</h2>
+                    <a href={`https://www.twitter.com/${savedUser.username}`}>
+                        @{savedUser.username}
+                    </a>
+                    <p>
+                        {savedUser && savedUser.usesLink && (
+                            <a href={savedUser.usesLink}>Uses Page</a>
+                        )}
+                    </p>
                     <Image
                         cloudName="jamesqquick"
                         publicId={

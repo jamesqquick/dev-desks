@@ -1,21 +1,14 @@
 require('dotenv').config();
 const { cloudinary } = require('./utils/cloudinary');
+const { requireAuth } = require('./utils/auth');
 
 const { table, getUser } = require('./utils/airtable');
-const { checkHeaderForValidToken } = require('./utils/auth');
-exports.handler = async (event) => {
-    let user = null;
+exports.handler = requireAuth(async (event, context) => {
     try {
-        user = await checkHeaderForValidToken(event.headers);
-    } catch (err) {
-        return {
-            statusCode: 401,
-            body: JSON.stringify({ err: 'Unauthorized' }),
-        };
-    }
-    const file = event.body;
-    const username = user['http://whotofollow.com/handle'];
-    try {
+        const { claims: user } = context.identityContext;
+
+        const file = event.body;
+        const username = user.handle;
         const { public_id } = await cloudinary.uploader.upload(file, {
             upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET,
         });
@@ -41,7 +34,6 @@ exports.handler = async (event) => {
                 imgId: public_id,
                 username: 'jamesqquick',
             });
-            console.log(createdRecord);
             return {
                 statusCode: 200,
                 body: JSON.stringify(createdRecord),
@@ -54,4 +46,4 @@ exports.handler = async (event) => {
             body: JSON.stringify({ err: 'Failed to upload image' }),
         };
     }
-};
+});

@@ -2,7 +2,6 @@ import React from 'react';
 import { useImage } from 'use-cloudinary';
 
 export default function Image({ cloudName, publicId, transforms }) {
-    console.log(cloudName, publicId, transforms);
     const { getImage, data, status, error } = useImage({
         cloud_name: cloudName,
     });

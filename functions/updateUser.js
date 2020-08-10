@@ -1,26 +1,11 @@
 require('dotenv').config();
 
 const { table, getUser } = require('./utils/airtable');
-const { checkHeaderForValidToken } = require('./utils/auth');
-exports.handler = async (event) => {
-    let user = null;
-    try {
-        user = await checkHeaderForValidToken(event.headers);
-    } catch (err) {
-        return {
-            statusCode: 401,
-            body: JSON.stringify({ err: 'Unauthorized' }),
-        };
-    }
-    const { username, usesLink } = JSON.parse(event.body);
-    const tokenUsername = user['http://whotofollow.com/handle'];
-
-    if (username !== tokenUsername) {
-        return {
-            statusCode: 401,
-            body: JSON.stringify({ err: 'Unauthorized' }),
-        };
-    }
+const { requireAuth } = require('./utils/auth');
+exports.handler = requireAuth(async (event, context) => {
+    const { claims: user } = context.identityContext;
+    const username = user.handle;
+    const { usesLink } = JSON.parse(event.body);
 
     try {
         const existingRecord = await getUser(username);
@@ -56,4 +41,4 @@ exports.handler = async (event) => {
             body: JSON.stringify({ err: 'Failed to update user' }),
         };
     }
-};
+});
