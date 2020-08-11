@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image, Transformation } from 'cloudinary-react';
+import { Image, Transformation, Placeholder } from 'cloudinary-react';
 import { Link } from 'react-router-dom';
 
 export default function ImageGallery() {
@@ -28,12 +28,14 @@ export default function ImageGallery() {
                             cloudName="jamesqquick"
                             publicId={user.imgId}
                             className="gallery-img"
+                            loading="lazy"
                         >
                             <Transformation
                                 width="300"
                                 height="300"
                                 crop="fill"
                             />
+                            <Placeholder type="blur" />
                         </Image>
                     </Link>
                 ))}

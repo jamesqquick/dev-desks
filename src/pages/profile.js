@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Upload from '../components/Upload';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Image } from 'cloudinary-react';
+import { Image, Placeholder } from 'cloudinary-react';
 import Transformation from 'cloudinary-react/lib/components/Transformation';
 import UserProfileForm from '../components/UserProfileForm';
 
@@ -45,12 +45,14 @@ export default function Profile() {
                     </p>
                     <Image
                         cloudName="jamesqquick"
+                        loading="lazy"
                         publicId={
                             savedUser.imgId ||
                             'dev_setups/placeholder-image_vcbif2'
                         }
                     >
                         <Transformation width="800" crop="fill" />
+                        <Placeholder type="blur" />
                     </Image>
                 </>
             )}
