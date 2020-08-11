@@ -1,30 +1,15 @@
 import React from 'react';
-import { useImage } from 'use-cloudinary';
+import { Image, Transformation } from 'cloudinary-react';
+import Placeholder from 'cloudinary-react/lib/components/Placeholder';
 
-export default function Image({ cloudName, publicId, transforms }) {
-    const { getImage, data, status, error } = useImage({
-        cloud_name: cloudName,
-    });
-
-    React.useEffect(() => {
-        if (!publicId) return;
-        getImage({
-            public_id: publicId,
-            transform_options: {
-                ...transforms,
-            },
-        });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [publicId]);
-
-    if (status === 'loading') return <p>Loading...</p>;
-    if (status === 'error') return <p>{error.message}</p>;
-
+export default function MyImage({ publicId }) {
     return (
-        <img
-            src={data}
-            className="card-img-top"
-            alt="Transformed from Cloudinary"
-        />
+        <Image
+            loading="lazy"
+            publicId={publicId || 'dev_setups/placeholder-image_vcbif2'}
+        >
+            <Transformation width="800" crop="fill" />
+            <Placeholder type="blur" />
+        </Image>
     );
 }
