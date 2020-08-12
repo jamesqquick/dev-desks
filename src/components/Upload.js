@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useAlert } from 'react-alert';
 
 export default function Upload({ imageUploaded }) {
     const [imageDataUrl, setImageDataUrl] = useState('');
     const { getAccessTokenSilently } = useAuth0();
+    const alert = useAlert();
+
     const handleChange = (e) => {
         const file = e.target.files[0];
         const fsize = Math.round(file.size / 1024); //file size in kb
         if (fsize >= 4096) {
-            //TODO: feedback to user that the file is too big
+            alert.show('File size too big. Please upload a file under 4mb.', {
+                type: 'danger',
+            });
             e.target.value = null;
             return;
         }
