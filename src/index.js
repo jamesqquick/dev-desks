@@ -5,13 +5,24 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Auth0Provider from './Auth0ProviderWithHistory';
 import { BrowserRouter as Router } from 'react-router-dom';
-
+import { transitions, positions, Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from './components/AlertTemplate.js';
+const options = {
+    // you can also just use 'bottom center'
+    position: positions.TOP_RIGHT,
+    timeout: 5000,
+    // offset: '130px',
+    // you can also just use 'scale'
+    transition: transitions.SCALE,
+};
 ReactDOM.render(
-    <Router>
-        <Auth0Provider>
-            <App />
-        </Auth0Provider>
-    </Router>,
+    <AlertProvider template={AlertTemplate} {...options}>
+        <Router>
+            <Auth0Provider>
+                <App />
+            </Auth0Provider>
+        </Router>
+    </AlertProvider>,
     document.getElementById('root')
 );
 
