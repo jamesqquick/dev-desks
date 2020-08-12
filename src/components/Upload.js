@@ -6,6 +6,12 @@ export default function Upload({ imageUploaded }) {
     const { getAccessTokenSilently } = useAuth0();
     const handleChange = (e) => {
         const file = e.target.files[0];
+        const fsize = Math.round(file.size / 1024); //file size in kb
+        if (fsize >= 4096) {
+            //TODO: feedback to user that the file is too big
+            e.target.value = null;
+            return;
+        }
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
