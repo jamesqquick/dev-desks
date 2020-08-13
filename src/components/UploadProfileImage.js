@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useAlert } from 'react-alert';
 
-export default function Upload({ imageUploaded }) {
+export default function Upload({ imageUploaded, closeModal }) {
     const [imageDataUrl, setImageDataUrl] = useState('');
     const { getAccessTokenSilently } = useAuth0();
     const alert = useAlert();
@@ -40,9 +40,10 @@ export default function Upload({ imageUploaded }) {
                     authorization: `Bearer ${token}`,
                 },
             });
-            await res.json();
+            const data = await res.json();
             setImageDataUrl('');
-            imageUploaded();
+            imageUploaded(data.fields);
+            closeModal();
         } catch (err) {
             console.error(err);
         }
@@ -65,6 +66,13 @@ export default function Upload({ imageUploaded }) {
                     disabled={!imageDataUrl}
                 >
                     Upload
+                </button>
+                <button
+                    type="button"
+                    className="btn btn-danger mb-2"
+                    onClick={closeModal}
+                >
+                    Cancel
                 </button>
             </form>
             {imageDataUrl && (
