@@ -9,27 +9,28 @@ exports.handler = requireAuth(async (event, context) => {
 
         const file = event.body;
         const username = user.handle;
+        const existingUser = await getUser(username);
+        if (existingUser.fields.imgId) {
+            //delete previous image from Cloudinary if one already exists
+            await cloudinary.api.delete_resources([existingUser.fields.imgId]);
+        }
         const { public_id } = await cloudinary.uploader.upload(file, {
             upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET,
         });
 
-        const existingRecord = await getUser(username);
-
-        if (existingRecord) {
-            //update
+        if (existingUser) {
             const minRecord = {
-                id: existingRecord.id,
-                fields: existingRecord.fields,
+                id: existingUser.id,
+                fields: existingUser.fields,
             };
             minRecord.fields.imgId = public_id;
             const updateRecords = [minRecord];
             await table.update(updateRecords);
             return {
                 statusCode: 200,
-                body: JSON.stringify(existingRecord),
+                body: JSON.stringify(existingUser),
             };
         } else {
-            //create
             const createdRecord = await table.create({
                 imgId: public_id,
                 username: 'jamesqquick',
