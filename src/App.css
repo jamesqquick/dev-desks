@@ -19,3 +19,11 @@
 .gallery-img:hover {
     transform: scale(1.03);
 }
+
+.profile {
+    max-width: 600px;
+}
+
+.container {
+    max-width: 600px !important;
+}

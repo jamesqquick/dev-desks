@@ -3,10 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import './App.css';
 import home from './pages/home';
-import profile from './pages/profile';
-import PublicProfile from './pages/publicProfile';
 import Navbar from './components/Navbar';
-import PrivateRoute from './components/PrivateRoute';
+import Profile from './pages/profile';
 function App() {
     const { isLoading } = useAuth0();
 
@@ -18,8 +16,7 @@ function App() {
 
             <Switch>
                 <Route component={home} path="/" exact />
-                <PrivateRoute component={profile} path="/profile" />
-                <Route path="/users/:username" component={PublicProfile} />
+                <Route path="/users/:username" component={Profile} />
             </Switch>
         </div>
     );
