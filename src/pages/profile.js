@@ -1,27 +1,18 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import Upload from '../components/UploadProfileImage';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Image, Placeholder } from 'cloudinary-react';
-import Transformation from 'cloudinary-react/lib/components/Transformation';
-import UserProfileForm from '../components/UserProfileForm';
-import Modal from 'react-modal';
 
-export default function Profile() {
+import PublicProfile from '../components/PublicProfile';
+import EditProfile from '../components/EditProfile';
+
+export default function Profile({ match }) {
     const [savedUser, setSavedUser] = useState(null);
-    const { isLoading, user } = useAuth0();
-    const [uploadVisible, setUploadVisible] = useState(false);
-    Modal.setAppElement('#root');
-
-    const customStyles = {
-        content: {},
-        overlay: {},
-    };
+    const { isLoading, user: loggedInUser } = useAuth0();
+    const { params } = match;
+    const [showEdit, setShowEdit] = useState(false);
 
     const loadUser = useCallback(async () => {
         if (isLoading) return;
-        //if(!user) //go home
-
-        const username = user.nickname;
+        const username = params.username;
         try {
             const res = await fetch(
                 `/.netlify/functions/getUser?username=${username}`
@@ -31,60 +22,48 @@ export default function Profile() {
         } catch (err) {
             console.error(err);
         }
-    }, [isLoading, user]);
+    }, [isLoading, params.username]);
+
     useEffect(() => {
         loadUser();
     }, [loadUser]);
 
-    const imageUploaded = async ({ imgId }) => {
-        setSavedUser((prevUser) => ({
-            ...prevUser,
-            imgId: imgId,
-        }));
+    const profileUpdated = () => {
+        loadUser();
+        setShowEdit(false);
     };
 
-    return (
-        <div>
-            <Modal
-                isOpen={uploadVisible}
-                contentLabel="Upload Profile Image"
-                style={customStyles}
-            >
-                <Upload
-                    imageUploaded={imageUploaded}
-                    closeModal={() => setUploadVisible(false)}
-                />
-            </Modal>
-            <button onClick={() => setUploadVisible(true)}>
-                Upload Profile Image
-            </button>
-            <UserProfileForm profileUpdated={loadUser} />
-
-            {savedUser && (
-                <>
-                    <h2>{savedUser.username}</h2>
-                    <a href={`https://www.twitter.com/${savedUser.username}`}>
-                        @{savedUser.username}
-                    </a>
-                    <p>
-                        {savedUser && savedUser.usesLink && (
-                            <a href={savedUser.usesLink}>Uses Page</a>
-                        )}
-                    </p>
-                    <Image
-                        cloudName="jamesqquick"
-                        loading="lazy"
-                        publicId={
-                            savedUser.imgId ||
-                            'dev_setups/placeholder-image_vcbif2'
-                        }
-                        style={customStyles}
+    if (savedUser) {
+        return (
+            <>
+                {loggedInUser &&
+                    !showEdit &&
+                    savedUser &&
+                    loggedInUser.nickname === savedUser.username && (
+                        <button
+                            className="btn btn-primary  mb-2"
+                            onClick={() => setShowEdit(true)}
+                        >
+                            Edit
+                        </button>
+                    )}
+                {showEdit && (
+                    <button
+                        className="btn btn-danger mb-2"
+                        onClick={() => setShowEdit(false)}
                     >
-                        <Transformation width="800" crop="fill" />
-                        <Placeholder type="blur" />
-                    </Image>
-                </>
-            )}
-        </div>
-    );
+                        Cancel
+                    </button>
+                )}
+                {!showEdit && <PublicProfile user={savedUser} />}
+                {showEdit && (
+                    <EditProfile
+                        user={savedUser}
+                        profileUpdated={profileUpdated}
+                    />
+                )}
+            </>
+        );
+    }
+    return null;
 }

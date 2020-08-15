@@ -2,13 +2,10 @@ import React from 'react';
 import { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
-export default function UserProfileForm({ profileUpdated }) {
-    const [usesLink, setUsesLink] = useState('');
+export default function UserProfileForm({ profileUpdated, user }) {
+    console.log(user);
+    const [usesLink, setUsesLink] = useState(user.usesLink);
     const { getAccessTokenSilently } = useAuth0();
-
-    const resetForm = () => {
-        setUsesLink('');
-    };
 
     const updateUserProfile = async (e) => {
         e.preventDefault();
@@ -23,7 +20,6 @@ export default function UserProfileForm({ profileUpdated }) {
                     authorization: `Bearer ${token}`,
                 },
             });
-            resetForm();
             profileUpdated();
         } catch (err) {
             console.error(err);
@@ -31,14 +27,21 @@ export default function UserProfileForm({ profileUpdated }) {
     };
     return (
         <form onSubmit={updateUserProfile}>
-            <label htmlFor="usesLink">Link to your uses page (optional)</label>
-            <input
-                type="text"
-                name="usesLink"
-                value={usesLink}
-                onChange={(e) => setUsesLink(e.target.value)}
-            />
-            <button>Save</button>
+            <div className="form-group">
+                <label htmlFor="usesLink">Link to uses page (optional)</label>
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="ex. https://www.jamesqquick.com/uses"
+                    name="usesLink"
+                    value={usesLink}
+                    onChange={(e) => setUsesLink(e.target.value)}
+                />
+            </div>
+
+            <button type="submit" className="btn btn-primary">
+                Save
+            </button>
         </form>
     );
 }

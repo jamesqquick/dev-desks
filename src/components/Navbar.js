@@ -7,6 +7,7 @@ export default function MyNavbar() {
         logout,
         isAuthenticated,
         isLoading,
+        user,
     } = useAuth0();
 
     return (
@@ -25,7 +26,7 @@ export default function MyNavbar() {
                 )}
                 {!isLoading && isAuthenticated && (
                     <>
-                        <Link to="/profile">Profile</Link>
+                        <Link to={`/users/${user.nickname}`}>Profile</Link>
                         <button
                             className="btn btn-link"
                             onClick={() =>
