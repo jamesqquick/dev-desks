@@ -1,24 +1,25 @@
 import React from 'react';
 import ProfileWrapper from './ProfileWrapper';
+import { FaTwitter, FaExternalLinkAlt } from 'react-icons/fa';
 
 export default function PublicProfile({ user }) {
     if (!user) return;
 
     return (
         <ProfileWrapper user={user}>
-            <h1 className="card-title text-center mb-4">{user.username}</h1>
-            <p className="mb-1">
-                Twitter:{' '}
-                <a href={`https://www.twitter.com/${user.username}`}>
-                    @{user.username}
+            <div className="flex">
+                <a
+                    className="mr-4"
+                    href={`https://www.twitter.com/${user.username}`}
+                >
+                    <FaTwitter />
                 </a>
-            </p>
-
-            {user.usesLink && (
-                <p>
-                    Uses Page: <a href={user.usesLink}>{user.usesLink}</a>
-                </p>
-            )}
+                {user.usesLink && (
+                    <a className="mr-2" href={user.usesLink}>
+                        <FaExternalLinkAlt />
+                    </a>
+                )}
+            </div>
         </ProfileWrapper>
     );
 }

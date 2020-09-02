@@ -3,22 +3,11 @@ import { Transformation, Image } from 'cloudinary-react';
 
 export default function ProfileWrapper({ user, imageClicked, children }) {
     return (
-        <div className="d-flex justify-content-center">
-            <div className="card profile">
-                <div className="editable-profile-image">
-                    <Image
-                        cloudName="jamesqquick"
-                        publicId={
-                            user.imgId || 'dev_setups/placeholder-image_vcbif2'
-                        }
-                        className="card-img-top"
-                        onClick={imageClicked}
-                    >
-                        <Transformation width="800" crop="fill" />
-                    </Image>
-                </div>
-                <div className="card-body">{children}</div>
-            </div>
+        <div>
+            <p className="font-bold text-lg">About</p>
+            <p className="my-2 ">{user.description}</p>
+
+            {children}
         </div>
     );
 }

@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Auth0Provider from './Auth0ProviderWithHistory';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from './components/AlertTemplate.js';
+import './assets/main.css';
+
 const options = {
     // you can also just use 'bottom center'
     position: positions.TOP_RIGHT,

@@ -5,19 +5,22 @@ import './App.css';
 import home from './pages/home';
 import Navbar from './components/Navbar';
 import Profile from './pages/profile';
+import About from './pages/about.js';
 function App() {
     const { isLoading } = useAuth0();
 
     if (isLoading) return <p>Loading</p>;
     return (
-        <div className="container ">
-            <h1 className="my-5 title text-center display-1">Dev Setups</h1>
+        <div className="container mx-auto p-4 pb-6">
             <Navbar />
 
-            <Switch>
-                <Route component={home} path="/" exact />
-                <Route path="/users/:username" component={Profile} />
-            </Switch>
+            <div className="max-w-3xl mx-auto">
+                <Switch>
+                    <Route component={home} path="/" exact />
+                    <Route component={About} path="/about" />
+                    <Route path="/users/:username" component={Profile} />
+                </Switch>
+            </div>
         </div>
     );
 }

@@ -26,12 +26,17 @@ export default function UserProfileForm({ profileUpdated, user }) {
         }
     };
     return (
-        <form onSubmit={updateUserProfile}>
-            <div className="form-group">
-                <label htmlFor="usesLink">Link to uses page (optional)</label>
+        <form className="mt-4" onSubmit={updateUserProfile}>
+            <div className="mb-4">
+                <label
+                    className="block  text-sm font-bold mb-2"
+                    htmlFor="usesLink"
+                >
+                    Uses Page URL (optional)
+                </label>
                 <input
                     type="text"
-                    className="form-control"
+                    className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     placeholder="ex. https://www.jamesqquick.com/uses"
                     name="usesLink"
                     value={usesLink}
@@ -39,7 +44,10 @@ export default function UserProfileForm({ profileUpdated, user }) {
                 />
             </div>
 
-            <button type="submit" className="btn btn-primary">
+            <button
+                type="submit"
+                className="inline-block text-sm px-4 py-2 rounded bg-blue-500 text-white  hover:bg-blue-600"
+            >
                 Save
             </button>
         </form>
