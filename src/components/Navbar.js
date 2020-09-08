@@ -49,7 +49,7 @@ export default function MyNavbar() {
                     {isAuthenticated && (
                         <>
                             <Link
-                                to={`/users/${user.nickname}`}
+                                to={`/profile`}
                                 className="block mt-4 lg:inline-block lg:mt-0  mr-4"
                             >
                                 Profile
