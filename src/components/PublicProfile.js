@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaTwitter, FaExternalLinkAlt } from 'react-icons/fa';
 import { Transformation, Image } from 'cloudinary-react';
 import { useQuery } from 'react-query';

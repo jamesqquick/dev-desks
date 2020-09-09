@@ -27,27 +27,6 @@ export default function Upload({ imageUploaded, closeModal }) {
         };
     };
 
-    const submitHandler = async (e) => {
-        e.target.value = null;
-
-        e.preventDefault();
-        try {
-            const token = await getAccessTokenSilently();
-            const res = await fetch('/.netlify/functions/upload', {
-                method: 'POST',
-                body: imageDataUrl,
-                headers: {
-                    authorization: `Bearer ${token}`,
-                },
-            });
-            const data = await res.json();
-            setImageDataUrl('');
-            imageUploaded(data.fields);
-            closeModal();
-        } catch (err) {
-            console.error(err);
-        }
-    };
     return (
         <div>
             <form onSubmit={submitHandler}>

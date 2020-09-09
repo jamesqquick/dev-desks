@@ -1,5 +1,4 @@
 import React from 'react';
-import { Image, Transformation, Placeholder } from 'cloudinary-react';
 import { ReactComponent as HeroDesk } from '../assets/desk-illustration.svg';
 
 export default function hero() {
