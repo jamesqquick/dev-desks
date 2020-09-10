@@ -15,6 +15,7 @@ exports.handler = async (event) => {
             body: JSON.stringify(formattedRecords),
         };
     } catch (err) {
+        console.error(err);
         return {
             statusCode: 500,
             body: JSON.stringify({ err: 'Failed to get users' }),
