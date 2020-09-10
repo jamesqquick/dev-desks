@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { table, getUser } = require('./utils/airtable');
+const { table, getUser, createUser } = require('./utils/airtable');
 const { requireAuth } = require('./utils/auth');
 exports.handler = requireAuth(async (event, context) => {
     const { claims: user } = context.identityContext;
@@ -25,10 +25,7 @@ exports.handler = requireAuth(async (event, context) => {
             };
         } else {
             //create
-            const createdRecord = await table.create({
-                username,
-                usesLink,
-            });
+            const createdRecord = await createUser(user);
             return {
                 statusCode: 200,
                 body: JSON.stringify(createdRecord),
