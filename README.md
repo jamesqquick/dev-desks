@@ -32,8 +32,9 @@ AIRTABLE_API_KEY=
 AIRTABLE_BASE_ID=
 AIRTABLE_TABLE_NAME=
 
-AUTH0_DOMAIN=whotofollow.auth0.com
-AUTH0_KEY_ID=83kBRWb7ovOMMVD6uEAHS
+AUTH0_DOMAIN=https://jamesqquick-demos.us.auth0.com/
+AUTH0_AUDIENCE=https://dev-setups-api
+AUTH0_NAMESPACE=http://devsetups.com/
 ```
 
 ## How to Run
@@ -61,3 +62,13 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### How to contribute
+
+Look at the existing issues and ask the maintainers to assign you to whatever issue you want to work on. If you have a feature idea, create an issue. For contributing, fork the project first and create a branch with:
+
+```
+git checkout -b featureName
+```
+
+After committing your changes and pushing them to your fork, create a PR and the maintainers will have a look at it.

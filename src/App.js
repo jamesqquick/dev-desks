@@ -1,29 +1,32 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useAuth0 } from './utils/auth';
+import { Route, Switch } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 import './App.css';
 import home from './pages/home';
-import profile from './pages/profile';
-import PublicProfile from './pages/publicProfile';
-function App() {
-    const { loading } = useAuth0();
+import Navbar from './components/Navbar';
+import Profile from './pages/profile';
+import About from './pages/about.js';
+import PublicProfile from './components/PublicProfile';
+import { ReactQueryDevtools } from 'react-query-devtools';
 
+function App() {
+    const { isLoading } = useAuth0();
+
+    if (isLoading) return <p>Loading</p>;
     return (
-        <Router>
-            <div className="container ">
-                {loading && <p>loading</p>}
-                {!loading && (
-                    <Switch>
-                        <Route component={home} path="/" exact />
-                        <Route component={profile} path="/profile" />
-                        <Route
-                            path="/users/:username"
-                            component={PublicProfile}
-                        />
-                    </Switch>
-                )}
+        <div className="container mx-auto p-4 pb-6">
+            <ReactQueryDevtools initialIsOpen />
+            <Navbar />
+
+            <div className="max-w-4xl mx-auto">
+                <Switch>
+                    <Route component={home} path="/" exact />
+                    <Route component={About} path="/about" />
+                    <Route path="/users/:username" component={PublicProfile} />
+                    <Route path="/profile" component={Profile} />
+                </Switch>
             </div>
-        </Router>
+        </div>
     );
 }
 

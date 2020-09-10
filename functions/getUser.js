@@ -1,5 +1,6 @@
 const { getMinifiedRecord, getUser } = require('./utils/airtable');
 exports.handler = async (event) => {
+    console.log('GETTING USER');
     let username = event.queryStringParameters['username'];
     if (!username) {
         return {

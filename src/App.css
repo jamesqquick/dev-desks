@@ -1,12 +1,16 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
 .image-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 300px);
+    grid-template-columns: repeat(auto-fit, 200px);
     grid-gap: 1rem;
+    justify-content: center;
 }
 
 .gallery-img {
-    height: 300px;
-    width: 300px;
+    height: 200px;
+    width: 200px;
     object-fit: cover;
     transition: transform 200ms;
     border-radius: 5px;
@@ -18,4 +22,12 @@
 
 .gallery-img:hover {
     transform: scale(1.03);
+}
+
+.profile {
+    max-width: 600px;
+}
+
+.container {
+    /* max-width: 600px !important; */
 }

@@ -1,52 +1,48 @@
 require('dotenv').config();
-const cloudinary = require('cloudinary').v2;
+const { cloudinary } = require('./utils/cloudinary');
+const { requireAuth } = require('./utils/auth');
 
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-const { table, getUser } = require('./utils/airtable');
-const { checkHeaderForValidToken } = require('./utils/auth');
-exports.handler = async (event) => {
-    let user = null;
+const { table, getUser, createUser } = require('./utils/airtable');
+exports.handler = requireAuth(async (event, context) => {
     try {
-        user = await checkHeaderForValidToken(event.headers);
-    } catch (err) {
-        return {
-            statusCode: 401,
-            body: JSON.stringify({ err: 'Unauthorized' }),
-        };
-    }
-    const file = event.body;
-    const username = user['http://whotofollow.com/handle'];
-    try {
+        const { claims: user } = context.identityContext;
+
+        const file = event.body;
+        const username = user.handle;
+        const existingUser = await getUser(username);
+
+        if (!existingUser) {
+            const createdRecord = await createUser(user);
+            return {
+                statusCode: 200,
+                body: JSON.stringify(createdRecord),
+            };
+        }
+        if (existingUser.fields.imgId) {
+            //delete previous image from Cloudinary if one already exists
+            await cloudinary.api.delete_resources([existingUser.fields.imgId]);
+        }
         const { public_id } = await cloudinary.uploader.upload(file, {
             upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET,
         });
 
-        const existingRecord = await getUser(username);
-
-        if (existingRecord) {
-            //update
+        if (existingUser) {
             const minRecord = {
-                id: existingRecord.id,
-                fields: existingRecord.fields,
+                id: existingUser.id,
+                fields: existingUser.fields,
             };
             minRecord.fields.imgId = public_id;
             const updateRecords = [minRecord];
             await table.update(updateRecords);
             return {
                 statusCode: 200,
-                body: JSON.stringify(existingRecord),
+                body: JSON.stringify(existingUser),
             };
         } else {
-            //create
             const createdRecord = await table.create({
                 imgId: public_id,
                 username: 'jamesqquick',
             });
-            console.log(createdRecord);
             return {
                 statusCode: 200,
                 body: JSON.stringify(createdRecord),
@@ -59,4 +55,4 @@ exports.handler = async (event) => {
             body: JSON.stringify({ err: 'Failed to upload image' }),
         };
     }
-};
+});

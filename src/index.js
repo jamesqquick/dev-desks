@@ -2,28 +2,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import history from './utils/history';
-import { Auth0Provider } from './utils/auth';
-import authConfig from './authConfig';
-const onRedirectCallback = (appState) => {
-    history.push(
-        appState && appState.targetUrl
-            ? appState.targetUrl
-            : window.location.pathname
-    );
-};
+import Auth0Provider from './Auth0ProviderWithHistory';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { transitions, positions, Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from './components/AlertTemplate.js';
+import './assets/main.css';
 
+const options = {
+    // you can also just use 'bottom center'
+    position: positions.TOP_RIGHT,
+    timeout: 5000,
+    // offset: '130px',
+    // you can also just use 'scale'
+    transition: transitions.SCALE,
+};
 ReactDOM.render(
-    <Auth0Provider
-        domain={authConfig.domain}
-        client_id={authConfig.clientId}
-        redirect_uri={window.location.origin}
-        onRedirectCallback={onRedirectCallback}
-        audience={authConfig.audience}
-    >
-        <App />
-    </Auth0Provider>,
+    <AlertProvider template={AlertTemplate} {...options}>
+        <Router>
+            <Auth0Provider>
+                <App />
+            </Auth0Provider>
+        </Router>
+    </AlertProvider>,
     document.getElementById('root')
 );
 
