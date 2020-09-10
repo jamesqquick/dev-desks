@@ -17,7 +17,7 @@ exports.handler = async (event) => {
     } catch (err) {
         return {
             statusCode: 500,
-            body: JSON.stringify({ err: 'Failed to upload image' }),
+            body: JSON.stringify({ err: 'Failed to get users' }),
         };
     }
 };
