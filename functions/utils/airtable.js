@@ -16,7 +16,7 @@ const getMinifiedRecord = (record) => {
 
 const createUser = async (user) => {
     const username = user.handle;
-    const description = user[`${process.env.AUTH0_NAMESPACE}description`];
+    const description = user.description;
     return await table.create({
         username,
         description,
