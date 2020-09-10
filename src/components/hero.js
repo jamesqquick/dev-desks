@@ -16,7 +16,7 @@ export default function Hero() {
                 <div className="flex">
                     <button
                         onClick={loginWithRedirect}
-                        className="inline-block mr-2 text-sm px-4 py-2 rounded bg-blue-500 text-white  hover:bg-blue-600"
+                        className="inline-block mr-2 text-sm px-4 py-2 rounded bg-accent-green-100 text-white hover:bg-accent-green-200"
                     >
                         Share Your Setup
                     </button>
