@@ -2,7 +2,11 @@ import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useAlert } from 'react-alert';
 
-export default function ImagePreview({ imageDataUrl, closeModal }) {
+export default function ImagePreview({
+    imageDataUrl,
+    closeModal,
+    imageUploaded,
+}) {
     const { getAccessTokenSilently } = useAuth0();
     const alert = useAlert();
 
@@ -22,6 +26,7 @@ export default function ImagePreview({ imageDataUrl, closeModal }) {
             alert.show('User profile image successfully updated', {
                 type: 'success',
             });
+            imageUploaded();
             closeModal();
         } catch (err) {
             console.error(err);

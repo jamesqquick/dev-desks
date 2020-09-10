@@ -5,7 +5,7 @@ import { Transformation, Image } from 'cloudinary-react';
 import Modal from 'react-modal';
 import ImagePreview from './ImagePreview';
 
-export default function UserImageUpload({ existingImageId }) {
+export default function UserImageUpload({ existingImageId, imageUploaded }) {
     const alert = useAlert();
     const [imageDataUrl, setImageDataUrl] = useState('');
     Modal.setAppElement('#root');
@@ -56,6 +56,7 @@ export default function UserImageUpload({ existingImageId }) {
                 <ImagePreview
                     closeModal={() => setImageDataUrl(null)}
                     imageDataUrl={imageDataUrl}
+                    imageUploaded={imageUploaded}
                 />
             </Modal>
             <div {...getRootProps()} className="relative">

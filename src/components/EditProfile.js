@@ -32,7 +32,10 @@ export default function EditProfile({ user, profileUpdated }) {
 
     return (
         <>
-            <UserImageUpload existingImageId={user.imgId} />
+            <UserImageUpload
+                existingImageId={user.imgId}
+                imageUploaded={profileUpdated}
+            />
 
             <form className="mt-4" onSubmit={updateUserProfile}>
                 <div className="mb-4">
