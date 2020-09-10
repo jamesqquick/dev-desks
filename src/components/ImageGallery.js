@@ -31,8 +31,8 @@ export default function ImageGallery() {
                             loading="lazy"
                         >
                             <Transformation
-                                width="300"
-                                height="300"
+                                width="200"
+                                height="200"
                                 crop="fill"
                             />
                             <Placeholder type="blur" />
