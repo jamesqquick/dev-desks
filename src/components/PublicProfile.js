@@ -32,8 +32,12 @@ export default function PublicProfile({ match: { params } }) {
                 <Transformation width="800" crop="fill" />
             </Image>
             <h1 className="text-4xl my-4 text-center">@{savedUser.username}</h1>
-            <p className="font-bold text-lg">About</p>
-            <p className="my-2 ">{savedUser.description}</p>
+            {savedUser.description && (
+                <>
+                    <p className="font-bold text-lg">About</p>
+                    <p className="my-2 ">{savedUser.description}</p>
+                </>
+            )}
             <div className="flex">
                 <a
                     className="mr-4"
