@@ -26,28 +26,17 @@ exports.handler = requireAuth(async (event, context) => {
             upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET,
         });
 
-        if (existingUser) {
-            const minRecord = {
-                id: existingUser.id,
-                fields: existingUser.fields,
-            };
-            minRecord.fields.imgId = public_id;
-            const updateRecords = [minRecord];
-            await table.update(updateRecords);
-            return {
-                statusCode: 200,
-                body: JSON.stringify(existingUser),
-            };
-        } else {
-            const createdRecord = await table.create({
-                imgId: public_id,
-                username: 'jamesqquick',
-            });
-            return {
-                statusCode: 200,
-                body: JSON.stringify(createdRecord),
-            };
-        }
+        const minRecord = {
+            id: existingUser.id,
+            fields: existingUser.fields,
+        };
+        minRecord.fields.imgId = public_id;
+        const updateRecords = [minRecord];
+        await table.update(updateRecords);
+        return {
+            statusCode: 200,
+            body: JSON.stringify(existingUser),
+        };
     } catch (err) {
         console.error(err);
         return {

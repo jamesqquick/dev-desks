@@ -11,7 +11,7 @@ export default function UserImageUpload({ existingImageId, imageUploaded }) {
     Modal.setAppElement('#root');
 
     const customStyles = {
-         content : {
+        content: {
             top: '50%',
             left: '50%',
             right: 'auto',
@@ -19,7 +19,7 @@ export default function UserImageUpload({ existingImageId, imageUploaded }) {
             border: 'none',
             background: 'none',
             marginRight: '-50%',
-            transform: 'translate(-50%, -50%)'
+            transform: 'translate(-50%, -50%)',
         },
         overlay: {},
     };
@@ -71,7 +71,7 @@ export default function UserImageUpload({ existingImageId, imageUploaded }) {
             <div {...getRootProps()} className="relative">
                 {
                     <Image
-                        cloudName="jamesqquick"
+                        cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
                         publicId={
                             existingImageId ||
                             'dev_setups/placeholder-image_vcbif2'

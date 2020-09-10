@@ -25,7 +25,9 @@ export default function ImageGallery() {
                 users.map((user, index) => (
                     <Link to={`/users/${user.username}`} key={index}>
                         <Image
-                            cloudName="jamesqquick"
+                            cloudName={
+                                process.env.REACT_APP_CLOUDINARY_CLOUD_NAME
+                            }
                             publicId={user.imgId}
                             className="gallery-img"
                             loading="lazy"
