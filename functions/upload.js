@@ -2,7 +2,7 @@ require('dotenv').config();
 const { cloudinary } = require('./utils/cloudinary');
 const { requireAuth } = require('./utils/auth');
 
-const { table, getUser } = require('./utils/airtable');
+const { table, getUser, createUser } = require('./utils/airtable');
 exports.handler = requireAuth(async (event, context) => {
     try {
         const { claims: user } = context.identityContext;
@@ -10,6 +10,14 @@ exports.handler = requireAuth(async (event, context) => {
         const file = event.body;
         const username = user.handle;
         const existingUser = await getUser(username);
+
+        if (!existingUser) {
+            const createdRecord = await createUser(user);
+            return {
+                statusCode: 200,
+                body: JSON.stringify(createdRecord),
+            };
+        }
         if (existingUser.fields.imgId) {
             //delete previous image from Cloudinary if one already exists
             await cloudinary.api.delete_resources([existingUser.fields.imgId]);

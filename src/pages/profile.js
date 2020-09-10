@@ -1,14 +1,17 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import EditProfile from '../components/EditProfile';
-import { getSavedUser } from '../utils/queries.js';
+import { getSavedUser, getLoggedInUser } from '../utils/queries.js';
 import { useQuery } from 'react-query';
 
 export default function Profile() {
-    const { user: loggedInUser } = useAuth0();
+    const { user: loggedInUser, getAccessTokenSilently } = useAuth0();
     const { isLoading, error, data: savedUser } = useQuery(
-        `fetchUser:${loggedInUser.nickname}`,
-        () => getSavedUser(loggedInUser.nickname),
+        `fetchLoggedInUser:${loggedInUser.nickname}`,
+        async () => {
+            const token = await getAccessTokenSilently();
+            return getLoggedInUser(token);
+        },
         {
             refetchOnWindowFocus: false,
         }

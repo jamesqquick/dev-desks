@@ -14,6 +14,15 @@ const getMinifiedRecord = (record) => {
     };
 };
 
+const createUser = async (user) => {
+    const username = user.handle;
+    const description = user['http://devsetups.com/description'];
+    return await table.create({
+        username,
+        description,
+    });
+};
+
 const getUser = async (username) => {
     const records = await table
         .select({
@@ -32,4 +41,5 @@ module.exports = {
     getMinifiedRecord,
     getUser,
     likesTable,
+    createUser,
 };
