@@ -27,9 +27,6 @@ export default function Profile() {
     if (savedUser) {
         return (
             <>
-                <h1 className="text-4xl my-4 text-center">
-                    @{savedUser.username}
-                </h1>
                 <EditProfile user={savedUser} profileUpdated={profileUpdated} />
             </>
         );

@@ -36,7 +36,7 @@ export default function EditProfile({ user, profileUpdated }) {
                 existingImageId={user.imgId}
                 imageUploaded={profileUpdated}
             />
-
+            <h1 className="text-4xl my-4 text-center">@{user.username}</h1>
             <form className="mt-4" onSubmit={updateUserProfile}>
                 <div className="mb-4">
                     <label

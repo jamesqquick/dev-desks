@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/logo.svg';
 export default function MyNavbar() {
     const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
@@ -8,7 +9,11 @@ export default function MyNavbar() {
         <nav className="flex items-center justify-between flex-wrap  p-6 mb-4">
             <div className="flex items-center flex-shrink-0  mr-6">
                 <Link to="/" className="font-semibold text-xl tracking-tight">
-                    DEV SETUPS
+                    <img
+                        className="h-10 w-auto"
+                        src={logo}
+                        alt="Dev Setups Logo"
+                    />
                 </Link>
             </div>
             <div className="block lg:hidden">

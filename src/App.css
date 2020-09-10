@@ -1,3 +1,6 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
 .image-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, 200px);
