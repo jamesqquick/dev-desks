@@ -9,7 +9,7 @@ exports.handler = requireAuth(async (event, context) => {
         let userRecord = await getUser(username);
 
         if (!userRecord) {
-            userRecord = createUser(user);
+            userRecord = await createUser(user);
         }
 
         const minifiedRecord = getMinifiedRecord(userRecord);
