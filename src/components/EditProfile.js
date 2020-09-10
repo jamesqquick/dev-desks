@@ -47,7 +47,7 @@ export default function EditProfile({ user, profileUpdated }) {
                     </label>
                     <input
                         type="text"
-                        className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="ex. https://www.jamesqquick.com/uses"
                         name="usesLink"
                         value={usesLink}
@@ -57,7 +57,7 @@ export default function EditProfile({ user, profileUpdated }) {
 
                 <button
                     type="submit"
-                    className="inline-block text-sm px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 disabled:opacity-50"
+                    className="inline-block text-sm px-4 py-2 rounded bg-accent-green-400 text-white hover:bg-accent-green-500 disabled:opacity-50"
                     disabled={user.usesLink === usesLink}
                 >
                     Save
