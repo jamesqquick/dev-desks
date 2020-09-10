@@ -33,16 +33,16 @@ export default function ImagePreview({
         }
     };
     return (
-        <div className="flex flex-col items-center justify-center">
+        <div className=" ">
             <img
                 className="rounded-md shadow-lg mb-5 mw-100"
                 src={imageDataUrl}
                 alt="Desk Setup"
             />
-            <div className="flex">
+            <div >
                 <button
                     type="submit"
-                    className="inline-block text-sm px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 mr-2"
+                    className="inline-block text-sm px-4 py-2 rounded bg-accent-green-400 text-white hover:bg-accent-green-500 mr-2"
                     disabled={!imageDataUrl}
                     onClick={uploadImage}
                 >

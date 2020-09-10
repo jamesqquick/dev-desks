@@ -49,7 +49,7 @@ export default function MyNavbar() {
                     {!isAuthenticated && (
                         <button
                             onClick={loginWithRedirect}
-                            className="inline-block text-sm px-4 py-2 rounded bg-accent-green-100 text-white hover:bg-accent-green-200 mb-5 lg:mg-0"
+                            className="inline-block text-sm px-4 py-2 rounded bg-accent-green-400 text-white hover:bg-accent-green-500 mb-5 lg:mg-0"
                         >
                             Login
                         </button>
@@ -66,7 +66,7 @@ export default function MyNavbar() {
                                 onClick={() =>
                                     logout({ returnTo: window.location.origin })
                                 }
-                                className="inline-block text-sm px-4 py-2 rounded bg-accent-green-100 text-white hover:bg-accent-green-200 mb-5 lg:mg-0"
+                                className="inline-block text-sm px-4 py-2 rounded bg-accent-green-400 text-white hover:bg-accent-green-500 mb-5 lg:mg-0"
                             >
                                 Logout
                             </button>

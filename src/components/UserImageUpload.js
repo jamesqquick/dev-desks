@@ -11,7 +11,16 @@ export default function UserImageUpload({ existingImageId, imageUploaded }) {
     Modal.setAppElement('#root');
 
     const customStyles = {
-        content: {},
+         content : {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            border: 'none',
+            background: 'none',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)'
+        },
         overlay: {},
     };
 
