@@ -14,14 +14,12 @@ export default function Hero() {
                     day-to-day life.
                 </p>
                 <div className="flex">
-                    {!isAuthenticated && (
-                        <button
-                            onClick={loginWithRedirect}
-                            className="inline-block mr-2 text-sm px-4 py-2 rounded bg-blue-500 text-white  hover:bg-blue-600"
-                        >
-                            Share Your Setup
-                        </button>
-                    )}
+                    <button
+                        onClick={loginWithRedirect}
+                        className="inline-block mr-2 text-sm px-4 py-2 rounded bg-blue-500 text-white  hover:bg-blue-600"
+                    >
+                        Share Your Setup
+                    </button>
                     {/* <button className="bg-transparent hover:bg-gray-900 text-gray-900 hover:text-white rounded shadow hover:shadow-lg py-2 px-4 border border-gray-900 hover:border-transparent">
                         // Explore //{' '}
                     </button> */}
