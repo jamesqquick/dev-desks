@@ -18,7 +18,6 @@ export default function Profile() {
     );
 
     const profileUpdated = () => {
-        // loadUser();
         queryCache.invalidateQueries(
             `fetchLoggedInUser:${loggedInUser.nickname}`
         );

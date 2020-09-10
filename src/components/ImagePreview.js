@@ -35,11 +35,11 @@ export default function ImagePreview({
     return (
         <div className=" ">
             <img
-                className="rounded-md shadow-lg mb-5 mw-100"
+                className="rounded-md shadow-lg mb-5 max-h-3/4 "
                 src={imageDataUrl}
                 alt="Desk Setup"
             />
-            <div >
+            <div>
                 <button
                     type="submit"
                     className="inline-block text-sm px-4 py-2 rounded bg-accent-green-400 text-white hover:bg-accent-green-500 mr-2"
