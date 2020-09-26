@@ -18,6 +18,8 @@ You'll need to create a base in Airtable and a table within the base for storing
 -   username (primary field) - single line text
 -   imgId - single line text
 -   usesLink - single line text
+-   description - long text
+-   approved - checkbox
 
 ### Environment Variables
 
@@ -27,6 +29,8 @@ After creating the free accounts above, you'll need to create a `.env` file with
 CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
+REACT_APP_CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_UPLOAD_PRESET=
 
 AIRTABLE_API_KEY=
 AIRTABLE_BASE_ID=
@@ -53,15 +57,6 @@ netlify dev
 
 You can then open the app at `localhost:8888`
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### How to contribute
 
