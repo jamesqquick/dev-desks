@@ -1,6 +1,7 @@
 import React from 'react';
 import ImageGallery from '../components/ImageGallery';
 import Hero from '../components/hero.js';
+
 export default function home() {
     return (
         <div>

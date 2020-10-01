@@ -18,7 +18,7 @@ function App() {
             <ReactQueryDevtools initialIsOpen />
             <Navbar />
 
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-6xl mx-auto">
                 <Switch>
                     <Route component={home} path="/" exact />
                     <Route component={About} path="/about" />

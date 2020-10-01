@@ -6,10 +6,10 @@ export default function Hero() {
     return (
         <div className="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
             <div className="flex flex-col w-full lg:w-1/2 justify-center items-start pt-12 pb-24 px-6">
-                <h1 className="font-bold text-3xl my-4">
-                    Where Developers Share Their Setups
+                <h1 className="font-bold text-3xl mb-2">
+                    Where Developers Share Setups
                 </h1>
-                <p className="leading-normal mb-4">
+                <p className="leading-normal mb-6">
                     See what equipment other developers are using in their
                     day-to-day life.
                 </p>
