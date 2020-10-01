@@ -43,20 +43,13 @@ AUTH0_NAMESPACE=http://devsetups.com/
 
 ## How to Run
 
-Install the Netlify CLI
-
-```bash
-npm install netlify-cli
-```
-
-Then, run the app with following command.
+Run the app with following command.
 
 ```bash
 netlify dev
 ```
 
 You can then open the app at `localhost:8888`
-
 
 ### How to contribute
 
