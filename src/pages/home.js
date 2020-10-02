@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ImageGallery from '../components/ImageGallery';
 import Hero from '../components/hero.js';
+import { ImagesContext } from '../contexts/ImagesContext';
 
-export default function home() {
+export default function Home() {
+    const { images } = useContext(ImagesContext);
     return (
         <div>
             <Hero />
-            <ImageGallery />
-            <p className="text-center my-5">
-                You’ve reached the end :) Add your setup if you haven’t yet!
-            </p>
+            {images && <ImageGallery images={images} />}
         </div>
     );
 }

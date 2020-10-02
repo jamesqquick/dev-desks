@@ -1,34 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Image, Transformation, Placeholder } from 'cloudinary-react';
 import { Link } from 'react-router-dom';
 
-export default function ImageGallery() {
-    const [users, setUsers] = useState(null);
-
-    const loadUsers = async () => {
-        try {
-            const res = await fetch('/.netlify/functions/getApprovedImages');
-            const users = await res.json();
-            setUsers(users);
-        } catch (err) {
-            console.error(err);
-        }
-    };
-
-    useEffect(() => {
-        loadUsers();
-    }, [setUsers]);
-
+export default function ImageGallery({ images }) {
     return (
         <div className="image-gallery">
-            {users &&
-                users.map((user, index) => (
-                    <Link to={`/users/${user.username}`} key={index}>
+            {images &&
+                images.map((image, index) => (
+                    <Link to={`/users/${image.username}`} key={index}>
                         <Image
                             cloudName={
                                 process.env.REACT_APP_CLOUDINARY_CLOUD_NAME
                             }
-                            publicId={user.imgId}
+                            publicId={image.imgId}
                             className="gallery-img"
                             loading="lazy"
                         >
