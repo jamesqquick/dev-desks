@@ -35,11 +35,32 @@ const getUser = async (username) => {
     }
     return records[0];
 };
+
+const getUserById = async id => {
+    const record = await table.find(id)
+    return getMinifiedRecord(record)
+};
+
+const getUserIds = async () => {
+    const userIds = []
+
+    await table.select({
+        fields: [],
+    }).eachPage((records, fetchNextPage) => {
+        records.forEach(record => userIds.push(record.id));
+        fetchNextPage()
+    })
+
+    return userIds
+}
+
 module.exports = {
     base,
     table,
     getMinifiedRecord,
     getUser,
+    getUserById,
+    getUserIds,
     likesTable,
     createUser,
 };

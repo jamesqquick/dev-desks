@@ -6,6 +6,7 @@ import home from './pages/home';
 import Navbar from './components/Navbar';
 import Profile from './pages/profile';
 import About from './pages/about.js';
+import Random from './pages/random.js';
 import PublicProfile from './components/PublicProfile';
 import { ReactQueryDevtools } from 'react-query-devtools';
 
@@ -22,6 +23,7 @@ function App() {
                 <Switch>
                     <Route component={home} path="/" exact />
                     <Route component={About} path="/about" />
+                    <Route component={Random} path="/random" />
                     <Route path="/users/:username" component={PublicProfile} />
                     <Route path="/profile" component={Profile} />
                 </Switch>
