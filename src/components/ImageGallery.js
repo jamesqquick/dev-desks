@@ -7,7 +7,7 @@ export default function ImageGallery() {
 
     const loadUsers = async () => {
         try {
-            const res = await fetch('/.netlify/functions/getUsers');
+            const res = await fetch('/.netlify/functions/getApprovedImages');
             const users = await res.json();
             setUsers(users);
         } catch (err) {
