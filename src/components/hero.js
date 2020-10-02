@@ -2,7 +2,7 @@ import React from 'react';
 import { ReactComponent as HeroDesk } from '../assets/desk-illustration.svg';
 import { useAuth0 } from '@auth0/auth0-react';
 export default function Hero() {
-    const { loginWithRedirect, isAuthenticated } = useAuth0();
+    const { loginWithRedirect } = useAuth0();
     return (
         <div className="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
             <div className="flex flex-col w-full lg:w-1/2 justify-center items-start pt-12 pb-24 px-6">
