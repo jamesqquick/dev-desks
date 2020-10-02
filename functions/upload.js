@@ -31,6 +31,7 @@ exports.handler = requireAuth(async (event, context) => {
             fields: existingUser.fields,
         };
         minRecord.fields.imgId = public_id;
+        minRecord.fields.approved = false;
         const updateRecords = [minRecord];
         await table.update(updateRecords);
         return {

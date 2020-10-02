@@ -3,7 +3,11 @@ const { table } = require('./utils/airtable');
 
 exports.handler = async (event) => {
     try {
-        const records = await table.select({}).firstPage();
+        const records = await table
+            .select({
+                filterByFormula: `approved = "1"`,
+            })
+            .firstPage();
         const formattedRecords = records
             .map((record) => ({
                 id: record.id,
