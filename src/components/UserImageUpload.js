@@ -21,7 +21,9 @@ export default function UserImageUpload({ existingImageId, imageUploaded }) {
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
         },
-        overlay: {},
+        overlay: {
+            backgroundColor: 'rgba(255,255,255,0.95)',
+        },
     };
 
     const onDrop = useCallback(

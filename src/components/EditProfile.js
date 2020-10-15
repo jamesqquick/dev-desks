@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import UserImageUpload from '../components/UserImageUpload';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useAlert } from 'react-alert';
 
 export default function EditProfile({ user, profileUpdated }) {
     const [usesLink, setUsesLink] = useState(user.usesLink);
     const { getAccessTokenSilently } = useAuth0();
-    const alert = useAlert();
 
     const updateUserProfile = async (e) => {
         e.preventDefault();
@@ -21,9 +19,6 @@ export default function EditProfile({ user, profileUpdated }) {
                     authorization: `Bearer ${token}`,
                 },
             });
-            alert.show('User profile successfully updated', {
-                type: 'success',
-            });
             profileUpdated();
         } catch (err) {
             console.error(err);
@@ -34,7 +29,11 @@ export default function EditProfile({ user, profileUpdated }) {
         <>
             <UserImageUpload
                 existingImageId={user.imgId}
-                imageUploaded={profileUpdated}
+                imageUploaded={() =>
+                    profileUpdated(
+                        'Thank you! Your image will be reviewed by an admin.'
+                    )
+                }
             />
             <h1 className="text-4xl my-4 text-center">@{user.username}</h1>
             <form className="mt-4" onSubmit={updateUserProfile}>

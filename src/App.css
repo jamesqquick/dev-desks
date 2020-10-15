@@ -9,8 +9,6 @@
 }
 
 .gallery-img {
-    height: 200px;
-    width: 200px;
     object-fit: cover;
     transition: transform 200ms;
     border-radius: 5px;

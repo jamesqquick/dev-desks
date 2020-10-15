@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useAlert } from 'react-alert';
 
 export default function ImagePreview({
     imageDataUrl,
@@ -8,7 +7,6 @@ export default function ImagePreview({
     imageUploaded,
 }) {
     const { getAccessTokenSilently } = useAuth0();
-    const alert = useAlert();
 
     const uploadImage = async (e) => {
         e.target.value = null;
@@ -23,9 +21,7 @@ export default function ImagePreview({
                     authorization: `Bearer ${token}`,
                 },
             });
-            alert.show('User profile image successfully updated', {
-                type: 'success',
-            });
+
             imageUploaded();
             closeModal();
         } catch (err) {
