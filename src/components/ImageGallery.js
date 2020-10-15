@@ -18,14 +18,14 @@ export default function ImageGallery({ images }) {
             {/* array of JSX items */}
             {images &&
                 images.map((image, index) => (
-                    <div>
+                    <div className="">
                         <Link to={`/users/${image.username}`} key={index}>
                             <Image
                                 cloudName={
                                     process.env.REACT_APP_CLOUDINARY_CLOUD_NAME
                                 }
                                 publicId={image.imgId}
-                                className="gallery-img"
+                                className="rounded-md shadow-md hover:shadow-xl transform transition-transform hover:-translate-y-1 duration-200"
                                 loading="lazy"
                             >
                                 <Transformation height="600" />
