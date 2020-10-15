@@ -1,30 +1,39 @@
 import React from 'react';
 import { Image, Transformation, Placeholder } from 'cloudinary-react';
 import { Link } from 'react-router-dom';
+import Masonry from 'react-masonry-css';
 
 export default function ImageGallery({ images }) {
+    const breakpointColumnsObj = {
+        default: 3,
+        1000: 2,
+        700: 1,
+    };
     return (
-        <div className="image-gallery">
+        <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+        >
+            {/* array of JSX items */}
             {images &&
                 images.map((image, index) => (
-                    <Link to={`/users/${image.username}`} key={index}>
-                        <Image
-                            cloudName={
-                                process.env.REACT_APP_CLOUDINARY_CLOUD_NAME
-                            }
-                            publicId={image.imgId}
-                            className="gallery-img"
-                            loading="lazy"
-                        >
-                            <Transformation
-                                width="200"
-                                height="200"
-                                crop="fill"
-                            />
-                            <Placeholder type="blur" />
-                        </Image>
-                    </Link>
+                    <div>
+                        <Link to={`/users/${image.username}`} key={index}>
+                            <Image
+                                cloudName={
+                                    process.env.REACT_APP_CLOUDINARY_CLOUD_NAME
+                                }
+                                publicId={image.imgId}
+                                className="gallery-img"
+                                loading="lazy"
+                            >
+                                <Transformation height="600" />
+                                <Placeholder type="blur" />
+                            </Image>
+                        </Link>
+                    </div>
                 ))}
-        </div>
+        </Masonry>
     );
 }
