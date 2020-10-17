@@ -1,12 +1,12 @@
-import React from "react"
-import {useQuery} from "react-query"
-import {getRandomUser} from "../utils/queries"
-import { Redirect } from 'react-router-dom'
-import Profile from "../components/Profile"
+import React from 'react';
+import { useQuery } from 'react-query';
+import { getRandomUser } from '../utils/queries';
+import { Redirect } from 'react-router-dom';
+import Profile from '../components/Profile';
 
 const Random = () => {
     const { isLoading, error, data: randomUser } = useQuery(
-        "fetchRandomUser",
+        'fetchRandomUser',
         getRandomUser,
         {
             refetchOnWindowFocus: false,
@@ -17,11 +17,10 @@ const Random = () => {
     if (isLoading) return <p>Loading...</p>;
 
     if (!randomUser || error) {
-        console.log('didnt get a user');
         return <Redirect to="/" />;
     }
 
-    return <Profile user={randomUser} />
-}
+    return <Profile user={randomUser} />;
+};
 
-export default Random
+export default Random;

@@ -18,8 +18,8 @@ export default function ImageGallery({ images }) {
             {/* array of JSX items */}
             {images &&
                 images.map((image, index) => (
-                    <div className="">
-                        <Link to={`/users/${image.username}`} key={index}>
+                    <div key={index}>
+                        <Link to={`/users/${image.username}`}>
                             <Image
                                 cloudName={
                                     process.env.REACT_APP_CLOUDINARY_CLOUD_NAME

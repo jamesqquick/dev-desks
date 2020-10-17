@@ -3,9 +3,13 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.svg';
 export default function MyNavbar() {
-    const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+    const {
+        loginWithRedirect,
+        logout,
+        isAuthenticated,
+        isLoading,
+    } = useAuth0();
     const [navbarOpen, setNavbarOpen] = React.useState(false);
-
     return (
         <nav className="lg:flex block items-center justify-between flex-wrap  py-6 mb-4 relative">
             <div className="flex items-center flex-shrink-0  mr-6">
@@ -46,7 +50,7 @@ export default function MyNavbar() {
                     >
                         About
                     </Link> */}
-                    {!isAuthenticated && (
+                    {!isAuthenticated && !isLoading && (
                         <button
                             onClick={loginWithRedirect}
                             className="inline-block uppercase mr-2 text-sm px-4 py-2 rounded-md bg-accent-green-700 text-white  border-b-2 hover:border-b-2 hover:border-accent-green-900"
@@ -54,11 +58,11 @@ export default function MyNavbar() {
                             Login
                         </button>
                     )}
-                    {isAuthenticated && (
+                    {isAuthenticated && !isLoading && (
                         <>
                             <Link
                                 to={`/profile`}
-                                className="block mt-4 text-lg lg:inline-block lg:mt-0  mr-4 mb-5 lg:mg-0 hover:border-b-4 border-accent-green-100"
+                                className="block mt-4 text-lg lg:inline-block lg:mt-0  mr-4 mb-5 lg:mg-0 border-b-4 border-transparent hover:border-accent-green-100"
                             >
                                 Profile
                             </Link>

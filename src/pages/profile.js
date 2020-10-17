@@ -4,9 +4,11 @@ import EditProfile from '../components/EditProfile';
 import { getLoggedInUser } from '../utils/queries.js';
 import { useQuery, queryCache } from 'react-query';
 import { useAlert } from 'react-alert';
+import Loading from '../components/Loading';
 
 export default function Profile() {
     const { user: loggedInUser, getAccessTokenSilently } = useAuth0();
+
     const alert = useAlert();
 
     const { data: savedUser } = useQuery(
