@@ -14,6 +14,10 @@ const getMinifiedRecord = (record) => {
     };
 };
 
+const getMinifiedRecords = (records) => {
+    return records.map((record) => getMinifiedRecord(record));
+};
+
 const createUser = async (user) => {
     const username = user.handle;
     const description = user.description;
@@ -21,6 +25,16 @@ const createUser = async (user) => {
         username,
         description,
     });
+};
+
+const getImages = async (approved) => {
+    const filterBool = approved ? 'TRUE' : 'FALSE';
+    const records = await table
+        .select({
+            filterByFormula: `( approved = ${filterBool}() )`,
+        })
+        .firstPage();
+    return getMinifiedRecords(records).filter((record) => !!record.imgId);
 };
 
 const getUser = async (username) => {
@@ -36,23 +50,41 @@ const getUser = async (username) => {
     return records[0];
 };
 
-const getUserById = async id => {
-    const record = await table.find(id)
-    return getMinifiedRecord(record)
+const getUserById = async (id) => {
+    const record = await table.find(id);
+    return getMinifiedRecord(record);
 };
 
 const getUserIds = async () => {
-    const userIds = []
+    const userIds = [];
 
-    await table.select({
-        fields: [],
-    }).eachPage((records, fetchNextPage) => {
-        records.forEach(record => userIds.push(record.id));
-        fetchNextPage()
-    })
+    await table
+        .select({
+            fields: [],
+        })
+        .eachPage((records, fetchNextPage) => {
+            records.forEach((record) => userIds.push(record.id));
+            fetchNextPage();
+        });
 
-    return userIds
-}
+    return userIds;
+};
+
+const approveImage = async (id) => {
+    const updateRecord = {
+        id: id,
+        fields: { approved: true },
+    };
+    return await table.update([updateRecord]);
+};
+
+const deleteImage = async (id) => {
+    const updateRecord = {
+        id: id,
+        fields: { imgId: null },
+    };
+    return await table.update([updateRecord]);
+};
 
 module.exports = {
     base,
@@ -63,4 +95,7 @@ module.exports = {
     getUserIds,
     likesTable,
     createUser,
+    getImages,
+    approveImage,
+    deleteImage,
 };

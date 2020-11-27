@@ -8,7 +8,7 @@ const ImagesProvider = ({ children }) => {
         `fetchApprovedImages`,
         getApprovedImages,
         {
-            refetchOnWindowFocus: false,
+            refetchOnWindowFocus: true,
             retry: false,
         }
     );
