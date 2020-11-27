@@ -5,11 +5,13 @@ import home from './pages/home';
 import Navbar from './components/Navbar';
 import Profile from './pages/profile';
 import About from './pages/about.js';
+import Admin from './pages/admin.js';
 import Random from './pages/random.js';
 import PublicProfile from './components/PublicProfile';
 import { ReactQueryDevtools } from 'react-query-devtools';
 import { ImagesProvider } from './contexts/ImagesContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import AuthorizedRoute from './components/AuthorizedRoute';
 
 function App() {
     return (
@@ -29,6 +31,12 @@ function App() {
                             component={PublicProfile}
                         />
                         <ProtectedRoute path="/profile" component={Profile} />
+                        <AuthorizedRoute
+                            path="/admin"
+                            component={Admin}
+                            permission="DEVDESK_ADMIN"
+                        />
+                        {/* FALLBACK ROUTE */}
                     </Switch>
                 </div>
             </ImagesProvider>

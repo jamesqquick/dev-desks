@@ -1,22 +1,11 @@
 require('dotenv').config();
-const { table } = require('./utils/airtable');
+const { getImages } = require('./utils/airtable');
 
 exports.handler = async (event) => {
     try {
-        const records = await table
-            .select({
-                filterByFormula: `approved = "1"`,
-            })
-            .firstPage();
-        const formattedRecords = records
-            .map((record) => ({
-                id: record.id,
-                ...record.fields,
-            }))
-            .filter((record) => !!record.imgId);
         return {
             statusCode: 200,
-            body: JSON.stringify(formattedRecords),
+            body: JSON.stringify(await getImages(true)),
         };
     } catch (err) {
         console.error(err);
