@@ -24,6 +24,7 @@
         "react-dom": "^16.13.1",
         "react-dropzone": "^11.0.3",
         "react-icons": "^3.11.0",
+        "react-loading-skeleton": "^2.1.1",
         "react-masonry-css": "^1.0.14",
         "react-modal": "^3.11.2",
         "react-query": "^2.14.1",
