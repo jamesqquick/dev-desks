@@ -8,7 +8,7 @@ export default function Home() {
     return (
         <div>
             <Hero />
-            {images && <ImageGallery images={images} />}
+            <ImageGallery images={images} />
         </div>
     );
 }

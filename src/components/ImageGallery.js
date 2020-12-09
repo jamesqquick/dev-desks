@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, Transformation, Placeholder } from 'cloudinary-react';
 import { Link } from 'react-router-dom';
 import Masonry from 'react-masonry-css';
+import GalleryPlaceholder from './GalleryPlaceholder';
 
 export default function ImageGallery({ images }) {
     const breakpointColumnsObj = {
@@ -9,6 +10,11 @@ export default function ImageGallery({ images }) {
         1000: 2,
         700: 1,
     };
+
+    if (!images) {
+        return <GalleryPlaceholder />;
+    }
+
     return (
         <Masonry
             breakpointCols={breakpointColumnsObj}
@@ -16,6 +22,7 @@ export default function ImageGallery({ images }) {
             columnClassName="my-masonry-grid_column"
         >
             {/* array of JSX items */}
+
             {images &&
                 images.map((image, index) => (
                     <div key={index}>

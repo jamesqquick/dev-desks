@@ -4,6 +4,7 @@ import { getSavedUser } from '../utils/queries.js';
 import { Redirect } from 'react-router-dom';
 import Profile from './Profile';
 import Loading from './Loading.js';
+import ProfilePlaceholder from './ProfilePlaceholder.js';
 
 export default function PublicProfile({ match: { params } }) {
     const { isLoading, error, data: savedUser } = useQuery(
@@ -15,12 +16,7 @@ export default function PublicProfile({ match: { params } }) {
         }
     );
 
-    if (isLoading)
-        return (
-            <div className="mt-16">
-                <Loading />
-            </div>
-        );
+    if (isLoading) return <ProfilePlaceholder />;
 
     if (!savedUser || error) {
         return <Redirect to="/" />;

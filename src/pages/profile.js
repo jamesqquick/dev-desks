@@ -5,6 +5,7 @@ import { getLoggedInUser } from '../utils/queries.js';
 import { useQuery, queryCache } from 'react-query';
 import { useAlert } from 'react-alert';
 import Loading from '../components/Loading';
+import ProfilePlaceholder from '../components/ProfilePlaceholder';
 
 export default function Profile() {
     const { user: loggedInUser, getAccessTokenSilently } = useAuth0();
@@ -38,5 +39,6 @@ export default function Profile() {
             </>
         );
     }
-    return null;
+    console.log('placeholder');
+    return <ProfilePlaceholder />;
 }
