@@ -1,62 +1,30 @@
-# Dev Setups
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-Dev Setups is a platform where users can share pictures of their desk setups. It is powered by React, Netlify Functions, Airtable, and Cloudinary.
+## Getting Started
 
-## Setup
-
-You'll need a free account with the following platforms.
-
--   Airtable
--   Cloudinary
-
-An Auth0 account is needed but you can use the credentials below. The Auth0 configuration is already done.
-
-### Airtable Setup
-
-You'll need to create a base in Airtable and a table within the base for storing user info
-
--   username (primary field) - single line text
--   imgId - single line text
--   usesLink - single line text
--   description - long text
--   approved - checkbox
-
-### Environment Variables
-
-After creating the free accounts above, you'll need to create a `.env` file with the following properties. You can copy from here or from the `.env.sample` file.
-
-```javascript
-CLOUDINARY_CLOUD_NAME=
-CLOUDINARY_API_KEY=
-CLOUDINARY_API_SECRET=
-REACT_APP_CLOUDINARY_CLOUD_NAME=
-CLOUDINARY_UPLOAD_PRESET=
-
-AIRTABLE_API_KEY=
-AIRTABLE_BASE_ID=
-AIRTABLE_TABLE_NAME=
-
-AUTH0_DOMAIN=https://jamesqquick-demos.us.auth0.com/
-AUTH0_AUDIENCE=https://dev-setups-api
-AUTH0_NAMESPACE=http://devsetups.com/
-```
-
-## How to Run
-
-Run the app with following command.
+First, run the development server:
 
 ```bash
-netlify dev
+npm run dev
+# or
+yarn dev
 ```
 
-You can then open the app at `localhost:8888`
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### How to contribute
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-Look at the existing issues and ask the maintainers to assign you to whatever issue you want to work on. If you have a feature idea, create an issue. For contributing, fork the project first and create a branch with:
+## Learn More
 
-```
-git checkout -b featureName
-```
+To learn more about Next.js, take a look at the following resources:
 
-After committing your changes and pushing them to your fork, create a PR and the maintainers will have a look at it.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
