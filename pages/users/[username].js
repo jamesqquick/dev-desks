@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import { getUser } from '../api/utils/airtable';
+const { getUser } = require('../../utils/airtable');
+
 import Profile from '../../components/Profile';
 export default function UserProfile({ dbUser }) {
     return (

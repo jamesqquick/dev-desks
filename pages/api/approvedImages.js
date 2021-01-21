@@ -1,4 +1,4 @@
-const { getImages } = require('./utils/airtable');
+const { getImages } = require('../../utils/airtable');
 
 export default async (req, res) => {
     try {
