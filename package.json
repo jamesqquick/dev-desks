@@ -1,33 +1,33 @@
 {
-  "name": "nextjs-version",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "@auth0/nextjs-auth0": "^0.16.0",
-    "airtable": "^0.10.1",
-    "alert": "^5.0.8",
-    "autoprefixer": "^10.1.0",
-    "babel-plugin-inline-react-svg": "^1.1.2",
-    "cloudinary": "^1.23.0",
-    "cloudinary-react": "^1.6.8",
-    "next": "10.0.3",
-    "postcss": "^8.2.1",
-    "react": "^17.0.1",
-    "react-alert": "^7.0.2",
-    "react-dom": "17.0.1",
-    "react-dropzone": "^11.2.4",
-    "react-icons": "^4.1.0",
-    "react-loading-skeleton": "^2.1.1",
-    "react-masonry-css": "^1.0.14",
-    "react-modal": "^3.12.1",
-    "react-query": "^3.3.0",
-    "react-query-devtools": "^2.6.3",
-    "swr": "^0.3.10",
-    "tailwindcss": "^2.0.2"
-  }
+    "name": "nextjs-version",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start"
+    },
+    "dependencies": {
+        "@auth0/nextjs-auth0": "^0.16.0",
+        "airtable": "^0.10.1",
+        "alert": "^5.0.8",
+        "autoprefixer": "^10.1.0",
+        "babel-plugin-inline-react-svg": "^1.1.2",
+        "cloudinary": "^1.23.0",
+        "cloudinary-react": "^1.6.8",
+        "next": "10.0.3",
+        "postcss": "^8.2.1",
+        "react": "^17.0.1",
+        "react-alert": "^7.0.2",
+        "react-dom": "17.0.1",
+        "react-dropzone": "^11.2.4",
+        "react-icons": "^4.1.0",
+        "react-loading-skeleton": "^2.1.1",
+        "react-masonry-css": "^1.0.14",
+        "react-modal": "^3.12.1",
+        "react-query": "^3.3.0",
+        "react-query-devtools": "^2.6.3",
+        "swr": "^0.3.10",
+        "tailwindcss": "^2.0.2"
+    }
 }
