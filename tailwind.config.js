@@ -1,11 +1,6 @@
 module.exports = {
-    future: {
-        removeDeprecatedGapUtilities: true,
-        purgeLayersByDefault: true,
-    },
-    purge: {
-        content: ['./src/**/*.js'],
-    },
+    purge: ['./pages/**/*.js', './components/**/*.js'],
+    darkMode: false, // or 'media' or 'class'
     theme: {
         extend: {
             colors: {
@@ -22,7 +17,7 @@ module.exports = {
                 },
             },
             maxHeight: {
-                '0': '0',
+                0: '0',
                 '1/4': '25%',
                 '1/2': '50%',
                 '3/4': '75vh',
