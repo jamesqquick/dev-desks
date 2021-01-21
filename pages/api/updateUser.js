@@ -1,4 +1,5 @@
-const { table, getUser, createUser } = require('./utils/airtable');
+const { table, getUser, createUser } = require('../../utils/airtable');
+
 const auth0 = require('../../utils/auth0');
 
 export default auth0.default.requireAuthentication(async (req, res) => {
