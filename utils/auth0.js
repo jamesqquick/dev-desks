@@ -1,13 +1,13 @@
 import { initAuth0 } from '@auth0/nextjs-auth0';
 
+console.log(`${process.env.APPLICATION_DOMAIN}/api/callback`);
 export default initAuth0({
     domain: process.env.AUTH0_DOMAIN,
     clientId: process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
-    audience: process.env.AUTH0_AUDIENCE,
     scope: 'openid profile',
-    redirectUri: 'http://localhost:3000/api/callback', //TODO: update for prod
-    postLogoutRedirectUri: 'http://localhost:3000/', //TODO: update for prod
+    redirectUri: `${process.env.APPLICATION_DOMAIN}/api/callback`,
+    postLogoutRedirectUri: `${process.env.APPLICATION_DOMAIN}/`,
     session: {
         // The secret used to encrypt the cookie.
         cookieSecret: process.env.AUTH0_COOKIE_SECRET,

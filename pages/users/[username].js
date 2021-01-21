@@ -26,6 +26,5 @@ export async function getServerSideProps({ params }) {
         res.setHeader('Location', `/404`); // Replace <link> with your url link
         return { props: {} };
     }
-    console.log(dbUser);
     return { props: { dbUser } };
 }

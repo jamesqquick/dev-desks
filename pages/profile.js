@@ -2,7 +2,7 @@ import Head from 'next/head';
 import React from 'react';
 import auth0 from '../utils/auth0';
 import EditProfile from '../components/EditProfile';
-import { getUser } from './api/utils/airtable';
+import { getUser } from '../utils/airtable';
 export default function LoggedInProfile({ user, dbUser }) {
     const profileUpdated = () => {
         //TODO: refresh dbUser?
@@ -36,6 +36,9 @@ export async function getServerSideProps({ req, res }) {
         const username = session.user['http://devsetups.com/handle'];
         const dbUser = await getUser(username);
 
+        if (!dbUser) {
+            return { props: { user: session.user, dbUser: {} } };
+        }
         return { props: { user: session.user, dbUser } };
     } catch (err) {
         console.error(err);
