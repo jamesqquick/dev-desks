@@ -3,9 +3,10 @@ import React from 'react';
 import auth0 from '../utils/auth0';
 import EditProfile from '../components/EditProfile';
 import { getUser } from '../utils/airtable';
+import Router from 'next/router';
 export default function LoggedInProfile({ user, dbUser }) {
     const profileUpdated = () => {
-        //TODO: refresh dbUser?
+        Router.reload(window.location.pathname);
     };
 
     return (

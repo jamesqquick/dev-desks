@@ -2,10 +2,9 @@ import Head from 'next/head';
 import React from 'react';
 import ImageGallery from '../components/ImageGallery';
 import Hero from '../components/hero.js';
-import useImages from '../hooks/UseImages';
+import { getImages } from '../utils/airtable';
 
-export default function Home() {
-    const { images, error, loading } = useImages();
+export default function Home({ images }) {
     return (
         <div>
             <Head>
@@ -15,8 +14,18 @@ export default function Home() {
 
             <main>
                 <Hero />
-                {images && <ImageGallery images={images} />}
+                <ImageGallery images={images} />
             </main>
         </div>
     );
+}
+
+export async function getStaticProps(context) {
+    const images = await getImages(true);
+    if (!images) {
+        //TODO: throw an error
+    }
+    return {
+        props: { images: images },
+    };
 }

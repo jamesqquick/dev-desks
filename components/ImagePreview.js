@@ -10,7 +10,7 @@ export default function ImagePreview({
 
         e.preventDefault();
         try {
-            await fetch('/.netlify/functions/upload', {
+            await fetch('/api/upload', {
                 method: 'POST',
                 body: imageDataUrl,
             });
