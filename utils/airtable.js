@@ -17,13 +17,12 @@ const getMinifiedRecords = (records) => {
     return records.map((record) => getMinifiedRecord(record));
 };
 
-const createUser = async (user) => {
-    const username = user.handle;
-    const description = user.description;
-    return await table.create({
-        username,
-        description,
-    });
+const createUser = async (username, usesLink) => {
+    return await table.create([
+        {
+            fields: { username, usesLink },
+        },
+    ]);
 };
 
 const getImages = async (approved) => {
