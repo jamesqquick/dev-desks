@@ -17,7 +17,7 @@ export default function UserProfile({ dbUser }) {
     );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, res }) {
     const username = params.username;
     const dbUser = await getUser(username);
 
