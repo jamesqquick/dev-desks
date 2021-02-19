@@ -20,7 +20,7 @@ export default function Home({ images }) {
     );
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
     const images = await getImages(true);
     if (!images) {
         //TODO: throw an error
