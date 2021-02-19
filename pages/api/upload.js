@@ -8,7 +8,6 @@ export default auth0.default.requireAuthentication(async (req, res) => {
     const file = req.body;
     try {
         const existingRecord = await getUser(username);
-        console.log(existingRecord);
         if (existingRecord && existingRecord.imgId) {
             //delete previous image from Cloudinary if one already exists
             await cloudinary.api.delete_resources([existingRecord.imgId]);
@@ -26,15 +25,7 @@ export default auth0.default.requireAuthentication(async (req, res) => {
             await table.update([recordUpdate]);
             return res.json(existingRecord);
         } else {
-            //create the user
-            const user = {
-                fields: {
-                    username,
-                    imgId: public_id,
-                    approved: false,
-                },
-            };
-            const createdRecord = await createUser(user);
+            const createdRecord = await createUser(username, '', public_id);
             return res.json(createdRecord);
         }
     } catch (err) {

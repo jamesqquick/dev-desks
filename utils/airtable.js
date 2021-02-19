@@ -17,10 +17,10 @@ const getMinifiedRecords = (records) => {
     return records.map((record) => getMinifiedRecord(record));
 };
 
-const createUser = async (username, usesLink) => {
+const createUser = async (username, usesLink, imgId) => {
     return await table.create([
         {
-            fields: { username, usesLink },
+            fields: { username, usesLink, imgId },
         },
     ]);
 };
