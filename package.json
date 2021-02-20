@@ -8,14 +8,14 @@
         "start": "next start"
     },
     "dependencies": {
-        "@auth0/nextjs-auth0": "^0.16.0",
+        "@auth0/nextjs-auth0": "^1.0.0",
         "airtable": "^0.10.1",
         "alert": "^5.0.8",
         "autoprefixer": "^10.1.0",
         "babel-plugin-inline-react-svg": "^1.1.2",
         "cloudinary": "^1.23.0",
         "cloudinary-react": "^1.6.8",
-        "next": "10.0.3",
+        "next": "^10.0.7",
         "postcss": "^8.2.1",
         "react": "^17.0.1",
         "react-alert": "^7.0.2",

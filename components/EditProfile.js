@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
+import useProfile from '../hooks/UseProfile';
 import UserImageUpload from './UserImageUpload';
 
-export default function EditProfile({ user, profileUpdated }) {
-    const [usesLink, setUsesLink] = useState(user.usesLink);
-    const updateUserProfile = async (e) => {
-        e.preventDefault();
+export default function EditProfile({ profile }) {
+    const { refreshProfile, updateProfile } = useProfile();
+    const [usesLink, setUsesLink] = useState(profile.usesLink);
+
+    const handleUpdateProfile = async (e) => {
         try {
-            await fetch('/api/updateUser', {
-                method: 'POST',
-                body: JSON.stringify({
-                    usesLink,
-                }),
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-            });
-            profileUpdated();
+            e.preventDefault();
+            await updateProfile({ usesLink });
+            refreshProfile();
         } catch (err) {
             console.error(err);
         }
@@ -24,16 +18,9 @@ export default function EditProfile({ user, profileUpdated }) {
 
     return (
         <>
-            <UserImageUpload
-                existingImageId={user.imgId}
-                imageUploaded={() =>
-                    profileUpdated(
-                        'Thank you! Your image will be reviewed by an admin.'
-                    )
-                }
-            />
-            <h1 className="text-4xl my-4 text-center">@{user.username}</h1>
-            <form className="mt-4" onSubmit={updateUserProfile}>
+            <UserImageUpload existingImageId={profile.imgId} />
+            <h1 className="text-4xl my-4 text-center">@{profile.username}</h1>
+            <form className="mt-4" onSubmit={handleUpdateProfile}>
                 <div className="mb-4">
                     <label
                         className="block  text-sm font-bold mb-2"
@@ -54,7 +41,7 @@ export default function EditProfile({ user, profileUpdated }) {
                 <button
                     type="submit"
                     className="inline-block text-sm px-4 py-2 rounded bg-accent-green-400 text-white hover:bg-accent-green-500 disabled:opacity-50"
-                    disabled={user.usesLink === usesLink}
+                    disabled={profile.usesLink === usesLink}
                 >
                     Save
                 </button>

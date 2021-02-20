@@ -1,10 +1,9 @@
 const { table, getUser, createUser } = require('../../utils/airtable');
 
-const auth0 = require('../../utils/auth0');
+import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
-export default auth0.default.requireAuthentication(async (req, res) => {
-    const { user } = await auth0.default.getSession(req);
-    console.log(user);
+export default withApiAuthRequired(async (req, res) => {
+    const { user } = await getSession(req, res);
     const username = user[`${process.env.AUTH0_TOKEN_NAMESPACE}handle`];
     const { usesLink } = req.body;
     try {
@@ -20,10 +19,7 @@ export default auth0.default.requireAuthentication(async (req, res) => {
             return res.json(existingRecord);
         } else {
             //create
-            console.log(username, usesLink);
-            const createdRecord = await createUser(username, usesLink);
-            console.log(createdRecord);
-            return res.json(createdRecord);
+            res.json(await createUser(username, usesLink));
         }
     } catch (err) {
         console.error(err);

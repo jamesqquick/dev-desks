@@ -1,10 +1,8 @@
 import React from 'react';
+import useProfile from '../hooks/UseProfile';
 
-export default function ImagePreview({
-    imageDataUrl,
-    closeModal,
-    imageUploaded,
-}) {
+export default function ImagePreview({ imageDataUrl, closeModal }) {
+    const { refreshProfile } = useProfile();
     const uploadImage = async (e) => {
         e.target.value = null;
 
@@ -15,8 +13,8 @@ export default function ImagePreview({
                 body: imageDataUrl,
             });
 
-            imageUploaded();
             closeModal();
+            refreshProfile();
         } catch (err) {
             console.error(err);
         }

@@ -1,10 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 import Logo from '../assets/logo.svg';
-import useUser from '../hooks/UseUser';
+import { useUser } from '@auth0/nextjs-auth0';
 export default function MyNavbar() {
     const [navbarOpen, setNavbarOpen] = React.useState(false);
-    const { user, loading, loggedIn } = useUser();
+    const { user, isLoading } = useUser();
+
     return (
         <nav className="lg:flex block items-center justify-between flex-wrap  py-6 mb-4 relative">
             <div className="flex items-center flex-shrink-0  mr-6">
@@ -43,15 +44,15 @@ export default function MyNavbar() {
                     >
                         About
                     </Link> */}
-                    {!loading && !loggedIn && (
+                    {!isLoading && !user && (
                         <a
-                            href="/api/login"
+                            href="/api/auth/login"
                             className="inline-block uppercase mr-2 text-sm px-4 py-2 rounded-md bg-accent-green-700 text-white  border-b-2 hover:border-b-2 hover:border-accent-green-900"
                         >
                             Login
                         </a>
                     )}
-                    {!loading && loggedIn && (
+                    {!isLoading && user && (
                         <>
                             <Link
                                 href={`/profile`}
@@ -59,7 +60,7 @@ export default function MyNavbar() {
                             >
                                 <a>My Profile</a>
                             </Link>
-                            <Link href={`/api/logout`}>
+                            <Link href={`/api/auth/logout`}>
                                 <a className="inline-block uppercase mr-2 text-sm px-4 py-2 rounded-md bg-accent-green-700 text-white  border-b-2 hover:border-b-2 hover:border-accent-green-900">
                                     Logout
                                 </a>

@@ -1,9 +1,9 @@
 const { table, getUser, createUser } = require('../../utils/airtable');
 const { cloudinary } = require('../../utils/cloudinary');
-const auth0 = require('../../utils/auth0');
+import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
-export default auth0.default.requireAuthentication(async (req, res) => {
-    const { user } = await auth0.default.getSession(req);
+export default withApiAuthRequired(async (req, res) => {
+    const { user } = await getSession(req, res);
     const username = user['http://devsetups.com/handle'];
     const file = req.body;
     try {
