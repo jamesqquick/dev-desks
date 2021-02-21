@@ -7,6 +7,6 @@ export function getCustomIdTokenProperty(user, name) {
 }
 
 export function userHasRole(user, role) {
-    const roles = getCustomIdTokenProperty(user, 'roles');
+    const roles = getCustomIdTokenProperty(user, 'roles') || [];
     return roles.includes(role);
 }
