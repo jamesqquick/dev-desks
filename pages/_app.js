@@ -6,7 +6,7 @@ import { UserProvider } from '@auth0/nextjs-auth0';
 
 const alertOptions = {
     position: positions.TOP_RIGHT,
-    timeout: 5000,
+    timeout: 3000,
     transition: transitions.SCALE,
 };
 function MyApp({ Component, pageProps }) {

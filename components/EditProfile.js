@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import useProfile from '../hooks/UseProfile';
 import UserImageUpload from './UserImageUpload';
+import { useAlert } from 'react-alert';
 
 export default function EditProfile({ profile }) {
     const { refreshProfile, updateProfile } = useProfile();
     const [usesLink, setUsesLink] = useState(profile.usesLink);
+    const alert = useAlert();
 
     const handleUpdateProfile = async (e) => {
         try {
             e.preventDefault();
             await updateProfile({ usesLink });
             refreshProfile();
+            alert.show('Profile updated successfully', {
+                type: 'success',
+            });
         } catch (err) {
             console.error(err);
         }

@@ -3,14 +3,13 @@ import React from 'react';
 export default function AlertTemplate({ style, options, message, close }) {
     const typeToColorMap = {
         danger: 'red',
-        success: 'teal',
+        success: 'green',
         info: 'orange',
     };
     let color = typeToColorMap[options.type];
-
     return (
         <div
-            className={`bg-${color}-100 border-t-4 border-${color}-500 rounded-b text-${color}-900 px-4 py-3 shadow-md`}
+            className={`bg-${color}-100 border-t-4 border-${color}-500 rounded-b text-${color}-900 px-4 py-3 shadow-md mt-2`}
             role="alert"
         >
             <div className="flex">

@@ -1,30 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { useAlert } from 'react-alert';
 import { Transformation, Image } from 'cloudinary-react';
-import Modal from 'react-modal';
 import ImagePreview from './ImagePreview';
+import { useAlert } from 'react-alert';
+import MyModal from './MyModal';
 
 export default function UserImageUpload({ existingImageId }) {
-    const alert = useAlert();
     const [imageDataUrl, setImageDataUrl] = useState('');
-    // Modal.setAppElement('#root');
-
-    const customStyles = {
-        content: {
-            top: '50%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            border: 'none',
-            background: 'none',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
-        },
-        overlay: {
-            backgroundColor: 'rgba(255,255,255,0.95)',
-        },
-    };
+    const alert = useAlert();
 
     const onDrop = useCallback(
         (acceptedFiles) => {
@@ -59,16 +42,15 @@ export default function UserImageUpload({ existingImageId }) {
 
     return (
         <div className="flex justify-center mb-5">
-            <Modal
+            <MyModal
                 isOpen={!!imageDataUrl}
                 contentLabel="Upload Profile Image"
-                style={customStyles}
             >
                 <ImagePreview
                     closeModal={() => setImageDataUrl(null)}
                     imageDataUrl={imageDataUrl}
                 />
-            </Modal>
+            </MyModal>
             <div {...getRootProps()} className="relative">
                 {
                     <Image

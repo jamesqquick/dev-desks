@@ -1,11 +1,13 @@
 import React from 'react';
 import useProfile from '../hooks/UseProfile';
+import { useAlert } from 'react-alert';
 
 export default function ImagePreview({ imageDataUrl, closeModal }) {
     const { refreshProfile } = useProfile();
+    const alert = useAlert();
+
     const uploadImage = async (e) => {
         e.target.value = null;
-
         e.preventDefault();
         try {
             await fetch('/api/upload', {
@@ -15,6 +17,12 @@ export default function ImagePreview({ imageDataUrl, closeModal }) {
 
             closeModal();
             refreshProfile();
+            alert.show(
+                'Image uploaded successfully. An admin will review soon!',
+                {
+                    type: 'success',
+                }
+            );
         } catch (err) {
             console.error(err);
         }
