@@ -70,7 +70,7 @@ const getUserIds = async () => {
 
 const approveImage = async (id) => {
     const updateRecord = {
-        id: id,
+        id,
         fields: { approved: true },
     };
     return await table.update([updateRecord]);

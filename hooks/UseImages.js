@@ -14,7 +14,7 @@ const getImages = async () => {
     }
 };
 
-export default function useImages() {
+export default function UseImages() {
     const { data, mutate, error } = useSWR('approved_images', getImages);
 
     const loading = !data && !error;
@@ -24,5 +24,6 @@ export default function useImages() {
         error,
         images: data,
         mutate,
+        approveImage,
     };
 }
