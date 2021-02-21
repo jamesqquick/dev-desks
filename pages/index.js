@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 import ImageGallery from '../components/ImageGallery';
-import Hero from '../components/hero.js';
+import Hero from '../components/Hero.js';
 import { getImages } from '../utils/airtable';
 
 export default function Home({ images }) {
