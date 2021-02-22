@@ -25,7 +25,7 @@ export default function ImageGallery({ images }) {
             {images &&
                 images.map((image, index) => (
                     <div key={index}>
-                        <Link href={`/users/${image.sub}`}>
+                        <Link href={`/users/${image.twitterUsername}`}>
                             <a>
                                 <Image
                                     cloudName={cloudName}
