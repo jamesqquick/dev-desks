@@ -1,13 +1,17 @@
-const { table, getUser, createUser } = require('../../utils/airtable');
+const {
+    table,
+    getProfileBySub,
+    createProfile,
+} = require('../../utils/airtable');
 const { cloudinary } = require('../../utils/cloudinary');
 import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
 export default withApiAuthRequired(async (req, res) => {
     const { user } = await getSession(req, res);
-    const username = user['http://devsetups.com/handle'];
+    const { sub } = user;
     const file = req.body;
     try {
-        const existingRecord = await getUser(username);
+        const existingRecord = await getProfileBySub(sub);
         if (existingRecord && existingRecord.imgId) {
             //delete previous image from Cloudinary if one already exists
             await cloudinary.api.delete_resources([existingRecord.imgId]);
@@ -25,7 +29,10 @@ export default withApiAuthRequired(async (req, res) => {
             await table.update([recordUpdate]);
             return res.json(existingRecord);
         } else {
-            const createdRecord = await createUser(username, '', public_id);
+            const createdRecord = await createProfile({
+                sub,
+                imgId: public_id,
+            });
             return res.json(createdRecord);
         }
     } catch (err) {

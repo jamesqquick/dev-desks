@@ -4,7 +4,6 @@ Airtable.configure({
 });
 const base = Airtable.base(process.env.AIRTABLE_BASE_ID);
 const table = base(process.env.AIRTABLE_TABLE_NAME);
-const likesTable = base('likes');
 
 const getMinifiedRecord = (record) => {
     return {
@@ -17,12 +16,23 @@ const getMinifiedRecords = (records) => {
     return records.map((record) => getMinifiedRecord(record));
 };
 
-const createUser = async (username, usesLink, imgId) => {
+const createProfile = async (fields) => {
+    if (!fields.sub || !fields.name) {
+        throw new Error('Sub and name are required for creating a user');
+    }
     return await table.create([
         {
-            fields: { username, usesLink, imgId },
+            fields,
         },
     ]);
+};
+
+const updateProfile = async (id, fields) => {
+    const recordUpdate = {
+        id,
+        fields,
+    };
+    return await table.update([recordUpdate]);
 };
 
 const getImages = async (approved) => {
@@ -35,11 +45,11 @@ const getImages = async (approved) => {
     return getMinifiedRecords(records).filter((record) => !!record.imgId);
 };
 
-const getUser = async (username) => {
+const getProfileBySub = async (sub) => {
     const records = await table
         .select({
             maxRecords: 1,
-            filterByFormula: `username = "${username}"`,
+            filterByFormula: `sub = "${sub}"`,
         })
         .firstPage();
     if (records.length === 0) {
@@ -48,7 +58,20 @@ const getUser = async (username) => {
     return getMinifiedRecord(records[0]);
 };
 
-const getUserById = async (id) => {
+const getProfileByTwitterUsername = async (twitterUsername) => {
+    const records = await table
+        .select({
+            maxRecords: 1,
+            filterByFormula: `twitterUsername = "${twitterUsername}"`,
+        })
+        .firstPage();
+    if (records.length === 0) {
+        return null;
+    }
+    return getMinifiedRecord(records[0]);
+};
+
+const getProfileByRecordId = async (id) => {
     const record = await table.find(id);
     return getMinifiedRecord(record);
 };
@@ -88,12 +111,13 @@ module.exports = {
     base,
     table,
     getMinifiedRecord,
-    getUser,
-    getUserById,
+    getProfileBySub,
+    getProfileByTwitterUsername,
+    getProfileByRecordId,
     getUserIds,
-    likesTable,
-    createUser,
+    createProfile,
     getImages,
     approveImage,
     deleteImage,
+    updateProfile,
 };

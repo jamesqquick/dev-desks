@@ -1,4 +1,5 @@
 import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
+import { userHasRole } from './auth/[...auth0]';
 const { approveImage } = require('../../utils/airtable');
 
 export default withApiAuthRequired(async (req, res) => {

@@ -1,8 +1,8 @@
 import Head from 'next/head';
-const { getUser } = require('../../utils/airtable');
+const { getProfileBySub } = require('../../utils/airtable');
 
 import Profile from '../../components/Profile';
-export default function UserProfile({ dbUser }) {
+export default function UserProfile({ userProfile }) {
     return (
         <div>
             <Head>
@@ -11,20 +11,20 @@ export default function UserProfile({ dbUser }) {
             </Head>
 
             <main>
-                <Profile user={dbUser} />
+                <Profile user={userProfile} />
             </main>
         </div>
     );
 }
 
 export async function getServerSideProps({ params, res }) {
-    const username = params.username;
-    const dbUser = await getUser(username);
+    const userSub = params.userSub;
+    const userProfile = await getProfileBySub(userSub);
 
-    if (!dbUser) {
+    if (!userProfile) {
         res.statusCode = 404;
-        res.setHeader('Location', `/404`); // Replace <link> with your url link
+        res.setHeader('Location', `/404`);
         return { props: {} };
     }
-    return { props: { dbUser } };
+    return { props: { userProfile } };
 }

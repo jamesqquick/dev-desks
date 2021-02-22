@@ -9,7 +9,6 @@ export default function Admin() {
     const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 
     const handleApproveImage = async (imgId) => {
-        console.log('handle approval');
         try {
             await approveImage(imgId);
             refresh();

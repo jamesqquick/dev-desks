@@ -5,7 +5,6 @@ import { useUser } from '@auth0/nextjs-auth0';
 export default function MyNavbar() {
     const [navbarOpen, setNavbarOpen] = React.useState(false);
     const { user, isLoading } = useUser();
-
     return (
         <nav className="lg:flex block items-center justify-between flex-wrap  py-6 mb-4 relative">
             <div className="flex items-center flex-shrink-0  mr-6">

@@ -1,13 +1,18 @@
-const { table, getUser, createUser } = require('../../utils/airtable');
+const {
+    table,
+    getProfileBySub,
+    createProfile,
+} = require('../../utils/airtable');
 
 import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
 
 export default withApiAuthRequired(async (req, res) => {
     const { user } = await getSession(req, res);
-    const username = user[`${process.env.AUTH0_TOKEN_NAMESPACE}handle`];
+    const { sub, name } = user;
+
     const { usesLink } = req.body;
     try {
-        const existingRecord = await getUser(username);
+        const existingRecord = await getProfileBySub(sub);
 
         if (existingRecord) {
             //update
@@ -19,7 +24,13 @@ export default withApiAuthRequired(async (req, res) => {
             return res.json(existingRecord);
         } else {
             //create
-            res.json(await createUser(username, usesLink));
+            res.json(
+                await createProfile({
+                    sub,
+                    name,
+                    usesLink,
+                })
+            );
         }
     } catch (err) {
         console.error(err);

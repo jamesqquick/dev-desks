@@ -22,9 +22,9 @@ export default function EditProfile({ profile }) {
     };
 
     return (
-        <>
+        <div className="max-w-screen-md mx-auto">
             <UserImageUpload existingImageId={profile.imgId} />
-            <h1 className="text-4xl my-4 text-center">@{profile.username}</h1>
+            <h1 className="text-4xl my-4 text-center">{profile.name}</h1>
             <form className="mt-4" onSubmit={handleUpdateProfile}>
                 <div className="mb-4">
                     <label
@@ -51,6 +51,6 @@ export default function EditProfile({ profile }) {
                     Save
                 </button>
             </form>
-        </>
+        </div>
     );
 }

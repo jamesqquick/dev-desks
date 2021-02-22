@@ -7,7 +7,7 @@ const Profile = ({ user }) => {
     return (
         <>
             <div className="max-w-screen-md mx-auto">
-                <h1 className="text-4xl my-4 text-center">@{user.username}</h1>
+                <h1 className="text-4xl my-4 text-center">{user.name}</h1>
                 {user.description && (
                     <>
                         <p className="font-bold text-lg">About</p>
@@ -17,7 +17,7 @@ const Profile = ({ user }) => {
                 <div className="flex mb-10">
                     <a
                         className="mr-4"
-                        href={`https://www.twitter.com/${user.username}`}
+                        href={`https://www.twitter.com/${user.twitterUsername}`}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
