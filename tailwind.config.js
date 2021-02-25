@@ -1,5 +1,23 @@
 module.exports = {
-    purge: ['./pages/**/*.js', './components/**/*.js'],
+    purge: {
+        content: ['./pages/**/*.js', './components/**/*.js'],
+        options: {
+            safelist: [
+                'bg-red-100',
+                'border-red-500',
+                'text-red-900',
+                'text-red-500',
+                'bg-green-100',
+                'border-green-500',
+                'text-green-900',
+                'text-green-500',
+                'bg-info-100',
+                'border-info-500',
+                'text-info-900',
+                'text-info-500',
+            ],
+        },
+    },
     darkMode: false, // or 'media' or 'class'
     theme: {
         extend: {
