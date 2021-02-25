@@ -10,10 +10,14 @@ export default function ImagePreview({ imageDataUrl, closeModal }) {
         e.target.value = null;
         e.preventDefault();
         try {
-            await fetch('/api/upload', {
+            const res = await fetch('/api/upload', {
                 method: 'POST',
                 body: imageDataUrl,
             });
+
+            if (res.status !== 200) {
+                throw new Error("Something didn't work");
+            }
 
             closeModal();
             refreshProfile();
@@ -25,6 +29,9 @@ export default function ImagePreview({ imageDataUrl, closeModal }) {
             );
         } catch (err) {
             console.error(err);
+            alert.show('Failed to upload image.', {
+                type: 'danger',
+            });
         }
     };
     return (

@@ -13,9 +13,9 @@ export default function UserImageUpload({ existingImageId }) {
         (acceptedFiles) => {
             const file = acceptedFiles[0];
             const fsize = Math.round(file.size / 1024); //file size in kb
-            if (fsize >= 4096) {
+            if (fsize >= 3096) {
                 alert.show(
-                    'File size too big. Please upload a file under 4mb.',
+                    'File size too big. Please upload a file under 3Mb.',
                     {
                         type: 'danger',
                     }
