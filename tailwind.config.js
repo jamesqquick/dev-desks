@@ -3,10 +3,10 @@ module.exports = {
         content: ['./pages/**/*.js', './components/**/*.js'],
         options: {
             safelist: [
-                '/bg-(red|green|orange)-100/',
-                '/border-(red|green|orange)-500/',
-                '/text-(red|green|orange)-900/',
-                '/text-(red|green|orange)-500/',
+                /bg-(red|green|orange)-100/,
+                /border-(red|green|orange)-500/,
+                /text-(red|green|orange)-900/,
+                /text-(red|green|orange)-500/,
             ],
         },
     },
