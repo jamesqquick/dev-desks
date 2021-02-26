@@ -21,6 +21,7 @@
         "react-alert": "^7.0.2",
         "react-dom": "17.0.1",
         "react-dropzone": "^11.2.4",
+        "react-hook-form": "^6.15.4",
         "react-icons": "^4.1.0",
         "react-loading-skeleton": "^2.1.1",
         "react-masonry-css": "^1.0.14",

@@ -10,7 +10,7 @@ export default withApiAuthRequired(async (req, res) => {
     const { user } = await getSession(req, res);
     const { sub, name } = user;
 
-    const { usesLink } = req.body;
+    const { usesLink, githubUsername, twitterUsername, description } = req.body;
     try {
         const existingRecord = await getProfileBySub(sub);
 
@@ -18,7 +18,12 @@ export default withApiAuthRequired(async (req, res) => {
             //update
             const recordUpdate = {
                 id: existingRecord.id,
-                fields: { usesLink },
+                fields: {
+                    usesLink,
+                    ...(githubUsername && { githubUsername }),
+                    ...(twitterUsername && { twitterUsername }),
+                    ...(description && { description }),
+                },
             };
             await table.update([recordUpdate]);
             return res.json(existingRecord);
