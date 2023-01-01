@@ -15,7 +15,7 @@
         "babel-plugin-inline-react-svg": "^1.1.2",
         "cloudinary": "^1.23.0",
         "cloudinary-react": "^1.6.8",
-        "next": "^10.0.7",
+        "next": "^13.1.1",
         "postcss": "^8.2.1",
         "react": "^17.0.1",
         "react-alert": "^7.0.2",
